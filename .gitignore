@@ -30,6 +30,23 @@ fix_response.php
 fix_schema_response.php
 gzsql.php
 test.php
+clear_cache.php
+diag_schema.php
+diagnose2.php
+diagnose_502.php
+fix_controllers.php
+fix_head_injection.php
+fix_response_placement.php
+fix_schema_position.php
+read_controllers.php
+response_fixed.php
+response_original.php
+restore_controllers.php
+server_backup.php
+test_pages.php
+test_seo_urls.php
+admin_config.php
+fix_all_schema.php
 
 # --- OS files ---
 .DS_Store
