@@ -1,0 +1,381 @@
+.widget-connect {
+    position: fixed;
+    bottom: 30px;
+    z-index: 999999;
+    cursor: pointer
+}
+
+.widget-connect-right {
+    right: 20px
+}
+
+@media (max-width:768px) {
+    .widget-connect-right {
+        right: 10px;
+        bottom: 10px
+    }
+}
+
+.widget-connect-left {
+    left: 20px
+}
+
+@media (max-width:768px) {
+    .widget-connect-left {
+        left: 10px;
+        bottom: 10px
+    }
+}
+
+.widget-connect.active .widget-connect__button {
+    display: block
+}
+
+.widget-connect__button {
+    display: none;
+    height: 55px;
+    width: 55px;
+    margin: auto;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    font-size: 28px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    outline: 0 !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all;
+    transition-duration: .2s
+}
+
+@media (max-width:768px) {
+    .widget-connect__button {
+        height: 50px;
+        width: 50px
+    }
+}
+
+.widget-connect__button-activator:hover,
+.widget-connect__button:hover {
+    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, .4)
+}
+
+.widget-connect__button:active {
+    height: 48px;
+    width: 48px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0);
+    transition: all;
+    transition-duration: .2s
+}
+
+@media (max-width:768px) {
+    .widget-connect__button:active {
+        height: 45px;
+        width: 45px
+    }
+}
+
+.widget-connect__button-activator {
+    margin: auto;
+    border-radius: 50%;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all;
+    transition-duration: .2s;
+    text-align: right
+}
+
+.widget-connect__button-activator-icon {
+    height: 55px;
+    width: 55px;
+    background-image: url(/image/catalog/widget-multi-connect/chat.svg);
+    background-size: 55%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    -o-transition-duration: .2s;
+    transition-duration: .2s
+}
+
+@media (max-width:768px) {
+    .widget-connect__button-activator-icon {
+        height: 50px;
+        width: 50px
+    }
+}
+
+.widget-connect__button-activator-icon.active {
+    background-image: url(/image/catalog/widget-multi-connect/close.svg);
+    background-size: 45%;
+    transform: rotate(90deg)
+}
+
+.widget-connect__button-email {
+    background-color: #c3c3c3;
+    background-image: url(/image/catalog/widget-multi-connect/email.svg);
+    background-size: 69%;
+    background-position: 9px 9px
+}
+
+.widget-connect__button-telephone {
+    background-color: #ff802c;
+    background-image: url(/image/catalog/widget-multi-connect/call.svg);
+    background-size: 60%
+}
+
+.widget-connect__button-instagram {
+	background: #c928a5;
+  	background-image: url("/image/catalog/widget-multi-connect/instagram.svg");
+  	background-image: url("/image/catalog/widget-multi-connect/instagram.svg"), radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+}
+
+.widget-connect__button-messenger {
+    background-color: #00bcff;
+    background-image: url(/image/catalog/widget-multi-connect/messenger.svg);
+    background-size: 70%;
+    background-position-x: 9px
+}
+
+.widget-connect__button-viber {
+    background-color: #9a5aca;
+    background-image: url(/image/catalog/widget-multi-connect/viber.svg);
+    background-size: 100%
+}
+
+.widget-connect__button-skype {
+    background-color: #00aaf2;
+    background-image: url(/image/catalog/widget-multi-connect/skype.svg);
+    background-size: 65%
+}
+
+.widget-connect__button-whatsapp {
+    background-color: #4dc247;
+    background-image: url(/image/catalog/widget-multi-connect/whatsapp.svg);
+    background-size: 75%
+}
+
+.widget-connect__button-telegram {
+    background-color: #299fdb;
+    background-image: url(/image/catalog/widget-multi-connect/telegram.svg);
+    background-size: 60%;
+    background-position-x: 10px
+}
+
+.widget-connect__button-vk {
+    background-color: #45658e;
+    background-image: url(/image/catalog/widget-multi-connect/vk.svg);
+    background-size: 65%;
+    background-position-y: 11px
+}
+
+.widget-connect__button-line {
+    background-color: #00b901;
+    background-image: url(/image/catalog/widget-multi-connect/line.svg);
+    background-size: 70%;
+    background-position: 9px 9px
+}
+
+@-webkit-keyframes button-slide {
+    0% {
+        opacity: 0;
+        display: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        -ms-transform: translateY(15px);
+        -webkit-transform: translateY(15px);
+        -moz-transform: translateY(15px);
+        -o-transform: translateY(15px);
+        transform: translateY(15px)
+    }
+
+    to {
+        opacity: 1;
+        display: block;
+        margin-top: 0;
+        margin-bottom: 15px;
+        -ms-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+@-moz-keyframes button-slide {
+    0% {
+        opacity: 0;
+        display: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        -ms-transform: translateY(15px);
+        -webkit-transform: translateY(15px);
+        -moz-transform: translateY(15px);
+        -o-transform: translateY(15px);
+        transform: translateY(15px)
+    }
+
+    to {
+        opacity: 1;
+        display: block;
+        margin-top: 0;
+        margin-bottom: 14px;
+        -ms-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+@-o-keyframes button-slide {
+    0% {
+        opacity: 0;
+        display: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        -ms-transform: translateY(15px);
+        -webkit-transform: translateY(15px);
+        -moz-transform: translateY(15px);
+        -o-transform: translateY(15px);
+        transform: translateY(15px)
+    }
+
+    to {
+        opacity: 1;
+        display: block;
+        margin-top: 0;
+        margin-bottom: 15px;
+        -ms-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+@keyframes button-slide {
+    0% {
+        opacity: 0;
+        display: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        -ms-transform: translateY(15px);
+        -webkit-transform: translateY(15px);
+        -moz-transform: translateY(15px);
+        -o-transform: translateY(15px);
+        transform: translateY(15px)
+    }
+
+    to {
+        opacity: 1;
+        display: block;
+        margin-top: 0;
+        margin-bottom: 15px;
+        -ms-transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+.button-slide {
+    -webkit-animation-name: button-slide;
+    -moz-animation-name: button-slide;
+    -o-animation-name: button-slide;
+    animation-name: button-slide;
+    -webkit-animation-duration: .2s;
+    -moz-animation-duration: .2s;
+    -o-animation-duration: .2s;
+    animation-duration: .2s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards
+}
+
+.button-slide-out {
+    -webkit-animation-name: button-slide;
+    -moz-animation-name: button-slide;
+    -o-animation-name: button-slide;
+    animation-name: button-slide;
+    -webkit-animation-duration: .2s;
+    -moz-animation-duration: .2s;
+    -o-animation-duration: .2s;
+    animation-duration: .2s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: reverse;
+    -moz-animation-direction: reverse;
+    -o-animation-direction: reverse;
+    animation-direction: reverse
+}
+
+.widget-connect .tooltip {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    line-break: auto;
+    padding: 5px
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 5px 10px;
+    color: #fff;
+    text-align: center;
+    background-color: #333;
+    border-radius: 4px
+}
+
+.tooltip.left .tooltip-arrow {
+    top: 50%;
+    right: 0;
+    margin-top: -5px;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #333
+}
+
+.tooltip.right .tooltip-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    border-width: 5px 5px 5px 0;
+    border-right-color: #333
+}
+
+@media (min-width:1300px) {
+    .mobile-device {
+        display: none !important
+    }
+}
+
+@media (max-width:1299px) {
+    .desktop-device {
+        display: none !important
+    }
+}

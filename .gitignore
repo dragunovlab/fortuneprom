@@ -1,0 +1,53 @@
+# --- OpenCart ---
+# Config with DB credentials
+site/config.php
+site/admin/config.php
+config.php
+admin_config.php
+
+# Storage (cache, logs, modification cache, etc.)
+site/system/storage/
+
+# --- Database backups ---
+*.sql
+*.sql.gz
+
+# --- Temp PHP scripts (not part of the site) ---
+applymod.php
+backup.php
+checkfiles.php
+checkmod.php
+clearmod.php
+dbdump.php
+diagfinal.php
+diagmod.php
+diagmod2.php
+finalfix.php
+fixschema.php
+fixschema2.php
+fixschema3.php
+fix_response.php
+fix_schema_response.php
+gzsql.php
+test.php
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# --- IDE ---
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.vscode
+
+# --- Logs ---
+*.log
+
+# --- Composer ---
+vendor/
