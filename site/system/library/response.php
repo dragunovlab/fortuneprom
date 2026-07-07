@@ -147,6 +147,24 @@ class Response {
 				)
 			);
 
+		// LocalBusiness (Kazakhstan)
+		$schemas[] = array(
+			'@context' => 'https://schema.org',
+			'@type' => 'LocalBusiness',
+			'name' => 'FortunePROM.kz',
+			'description' => 'Комплексные поставки промышленного оборудования в Казахстане',
+			'url' => 'https://fortuneprom.kz/',
+			'telephone' => '+77786245665',
+			'email' => 'info@fortuneprom.kz',
+			'address' => array(
+				'@type' => 'PostalAddress',
+				'addressLocality' => 'Алматы',
+				'addressRegion' => 'Алматы',
+				'addressCountry' => 'KZ'
+			),
+			'openingHours' => 'Mo-Fr 09:00-18:00'
+		);
+
 			// Product page
 			if ($isProduct) {
 				$prodName = '';
@@ -218,7 +236,7 @@ class Response {
 			foreach ($schemas as $s) {
 				$schemaHtml .= '<script type="application/ld+json">' . json_encode($s, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "</script>\n";
 			}
-			$this->output = str_replace('</body>', $schemaHtml . '</body>', $this->output);
+			$this->output = str_replace('</head>', $schemaHtml . '</head>', $this->output);
 
 			$output = $this->level ? $this->compress($this->output, $this->level) : $this->output;
 			
