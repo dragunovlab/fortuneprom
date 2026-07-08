@@ -230,8 +230,39 @@ class Response {
 					)
 				);
 			}
-
-			// Render
+		
+		// Homepage SEO cleanup
+		if ($route === 'common/home' || $route === '') {
+			// Convert title-module divs to H2
+			$this->output = preg_replace_callback('/<div[^>]*class="title-module"[^>]*>(.+?)<\/div>/isu', function($m) {
+				$inner = preg_replace('/<\/?span[^>]*>/iu', '', $m[1]);
+				return '<h2 class="title-module">' . trim($inner) . '</h2>';
+			}, $this->output);
+			// Add H1 before first container-module (main content area)
+			if (stripos($this->output, '<h1') === false) {
+				$h1Text = html_entity_decode('&#1055;&#1088;&#1086;&#1084;&#1099;&#1096;&#1083;&#1077;&#1085;&#1085;&#1086;&#1077; &#1086;&#1073;&#1086;&#1088;&#1091;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077; FORTUNE PROM &#1074; &#1050;&#1072;&#1079;&#1072;&#1093;&#1089;&#1090;&#1072;&#1085;&#1077;', ENT_QUOTES, 'UTF-8');
+				$h1 = '<div class="container"><h1 class="seo-homepage-h1" style="font-size:22px;margin:20px 0 15px;color:#333;">' . $h1Text . '</h1></div>';
+				$this->output = preg_replace('/(<div[^>]*class="container-module"[^>]*>)/i', $h1 . '$1', $this->output, 1);
+			}
+		}
+		// end Homepage SEO cleanup
+		
+		// Homepage SEO cleanup
+		if ($route === 'common/home' || $route === '') {
+			// Convert title-module divs to H2
+			$this->output = preg_replace_callback('/<div[^>]*class="title-module"[^>]*>(.+?)<\/div>/isu', function($m) {
+				$inner = preg_replace('/<\/?span[^>]*>/iu', '', $m[1]);
+				return '<h2 class="title-module">' . trim($inner) . '</h2>';
+			}, $this->output);
+			// Add H1 if missing - place before first container-module
+			if (stripos($this->output, '<h1') === false) {
+				$h1Text = html_entity_decode('&#1055;&#1088;&#1086;&#1084;&#1099;&#1096;&#1083;&#1077;&#1085;&#1085;&#1086;&#1077; &#1086;&#1073;&#1086;&#1088;&#1091;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077; FORTUNE PROM &#1074; &#1050;&#1072;&#1079;&#1072;&#1093;&#1089;&#1090;&#1072;&#1085;&#1077;', ENT_QUOTES, 'UTF-8');
+				$h1 = '<div class="container"><h1 class="seo-homepage-h1" style="font-size:22px;margin:20px 0 15px;color:#333;">' . $h1Text . '</h1></div>';
+				$this->output = preg_replace('/(<div[^>]*class="container-module"[^>]*>)/i', $h1 . '$1', $this->output, 1);
+			}
+		}
+		// end Homepage SEO cleanup
+		// Render
 			$schemaHtml = '';
 			foreach ($schemas as $s) {
 				$schemaHtml .= '<script type="application/ld+json">' . json_encode($s, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "</script>\n";
