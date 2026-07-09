@@ -1,0 +1,619 @@
+{{ header }} 
+<span itemscope itemtype="http://schema.org/Organization">
+<meta itemprop="name" content="{{ name }}">
+<meta itemprop="logo" content="{{ logo }}">
+<meta itemprop="url" content="{{ url }}">
+<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+<meta itemprop="addressLocality" content="{{ addresslocality }}">
+<meta itemprop="streetAddress" content="{{ streetaddress }}">
+<meta itemprop="addressCountry" content="{{ addresscountry }}">
+</span>
+<meta itemprop="telephone" content="{{ telephone }}">
+<meta itemprop="email" content="{{ email }}">
+</span>
+<!-- Slider / Content Top -->
+<div class="container">
+	<div class="row">
+	{% if ((general_menu_on_off == '1') and (main_menu == '1')) %} 
+		<div class="sw-20 col-sm-4 col-md-3 position-no-owl hidden-xs hidden-sm">
+			<div id="menu-header-open"></div>
+			{% if (position_0 is defined) %} 
+				{% for pos0 in position_0 %}
+					{{ pos0 }} 
+				{% endfor %} 
+			{% endif %} 
+		</div>
+		<script>
+		if(window.matchMedia("(min-width: 992px)").matches){
+			$('header #menu-list').addClass("nsmenu-block");
+			$(function(){$('#menu-header-open').css({'min-height': $('header #menu-list').outerHeight()});});
+		}
+		$(window).resize(function() {
+			if ($(window).width() > 992) {
+				$('header #menu-list').addClass("nsmenu-block");
+				$(function(){$('#menu-header-open').css({'min-height': $('header #menu-list').outerHeight()});});
+			} else {
+				$('header #menu-list').removeClass("nsmenu-block");
+			}
+		});
+		</script>
+		<div class="sw-80 col-md-9">{{ content_top }}</div>
+		{% if (position_17 is defined) %} 
+			<div class="col-md-3 pos17">
+				{% for pos17 in position_17 %}
+					{{ pos17 }} 
+				{% endfor %}	
+			</div>
+		{% endif %} 
+		{% if (position_18 is defined) %} 
+			<div class="col-md-3 pos18">
+				{% for pos18 in position_18 %}
+					{{ pos18 }} 
+				{% endfor %}	
+			</div>
+		{% endif %} 
+		{% if (position_19 is defined) %} 
+			<div class="col-md-3 pos19">
+				{% for pos19 in position_19 %}
+					{{ pos19 }} 
+				{% endfor %}	
+			</div>
+		{% endif %} 
+		{% if (position_20 is defined) %} 
+			<div class="col-md-6 pos20">
+				{% for pos20 in position_20 %}
+					{{ pos20 }} 
+				{% endfor %}				
+			</div>
+		{% endif %} 
+		{% if (position_21 is defined) %} 
+			<div class="col-md-3 pos21">			
+				{% for pos21 in position_21 %}
+					{{ pos21 }} 
+				{% endfor %}			
+			</div>
+		{% endif %} 
+	{% else %} 
+		<div class="col-md-12">{{ content_top }}</div>
+		{% if (position_17 is defined) %} 
+			<div class="col-md-4 pos17">
+				{% for pos17 in position_17 %}
+					{{ pos17 }} 
+				{% endfor %}	
+			</div>
+		{% endif %} 
+		{% if (position_18 is defined) %} 
+			<div class="col-md-4 pos18">
+				{% for pos18 in position_18 %}
+					{{ pos18 }} 
+				{% endfor %}	
+			</div>
+		{% endif %} 
+		{% if (position_19 is defined) %} 
+			<div class="col-md-4 pos19">
+				{% for pos19 in position_19 %}
+					{{ pos19 }} 
+				{% endfor %}	
+			</div>
+		{% endif %} 
+		{% if (position_20 is defined) %} 
+			<div class="col-md-8 pos20">
+				{% for pos20 in position_20 %}
+					{{ pos20 }} 
+				{% endfor %}				
+			</div>
+		{% endif %} 
+		{% if (position_21 is defined) %} 
+			<div class="col-md-4 pos21">			
+				{% for pos21 in position_21 %}
+					{{ pos21 }} 
+				{% endfor %}			
+			</div>
+		{% endif %} 
+	{% endif %} 
+	</div>
+</div>
+  
+  <!-- Trust Badges Block -->
+  <div class="row home-trust-badges-row">
+    <div class="col-xs-12">
+      <div class="home-trust-badges">
+        <div class="badge-item">
+          <div class="badge-icon"><i class="fa fa-shield"></i></div>
+          <div class="badge-text">
+            <div class="badge-title">Официальная гарантия</div>
+            <div class="badge-desc">12 месяцев</div>
+          </div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon"><i class="fa fa-truck"></i></div>
+          <div class="badge-text">
+            <div class="badge-title">Доставка по Казахстану</div>
+            <div class="badge-desc">1–5 дней</div>
+          </div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon"><i class="fa fa-briefcase"></i></div>
+          <div class="badge-text">
+            <div class="badge-title">Работаем с ТОО и ИП</div>
+            <div class="badge-desc">Любая форма оплаты</div>
+          </div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon"><i class="fa fa-database"></i></div>
+          <div class="badge-text">
+            <div class="badge-title">Склад в Алматы</div>
+            <div class="badge-desc">Большой ассортимент</div>
+          </div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon"><i class="fa fa-headphones"></i></div>
+          <div class="badge-text">
+            <div class="badge-title">Техническая поддержка</div>
+            <div class="badge-desc">Подбор и консультация</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catalog of Equipment Grid -->
+  <div class="row home-catalog-row">
+    <div class="col-xs-12">
+      <div class="home-section-header">
+        <h2 class="home-section-title">Каталог оборудования</h2>
+        <a href="https://fortuneprom.kz/index.php?route=product/category&path=59" class="home-section-link">Перейти в каталог <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="home-catalog-grid">
+        <div class="catalog-card">
+          <div class="catalog-card-image">
+            <img src="https://fortuneprom.kz/image/catalog/image/catalog/easyphoto/2174/motor-reduktory-seryy-motovario-nmrv-y-nmrv-p.jpg" alt="Редукторы" />
+          </div>
+          <div class="catalog-card-content">
+            <h3 class="catalog-card-title">Редукторы</h3>
+            <p class="catalog-card-desc">Червячные, цилиндрические, коническо-цилиндрические, планетарные</p>
+            <a href="https://fortuneprom.kz/reduktory" class="catalog-card-link">Смотреть товары <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="catalog-card">
+          <div class="catalog-card-image">
+            <img src="https://fortuneprom.kz/image/cache/catalog/dvig/18794.970-200x200.png" alt="Электродвигатели" />
+          </div>
+          <div class="catalog-card-content">
+            <h3 class="catalog-card-title">Электродвигатели</h3>
+            <p class="catalog-card-desc">Общепромышленные, взрывозащищённые, постоянного тока, специальные</p>
+            <a href="https://fortuneprom.kz/electrodvigateli" class="catalog-card-link">Смотреть товары <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="catalog-card">
+          <div class="catalog-card-image">
+            <img src="https://fortuneprom.kz/image/cache/catalog/nasosi/skvaj/SkvazhinnijNasosECV10-160-100(nro)-200x200.jpg" alt="Насосы" />
+          </div>
+          <div class="catalog-card-content">
+            <h3 class="catalog-card-title">Насосы</h3>
+            <p class="catalog-card-desc">Центробежные, скважинные, фекальные, повысительные</p>
+            <a href="https://fortuneprom.kz/nasosnoe-oborudovanie" class="catalog-card-link">Смотреть товары <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="catalog-card">
+          <div class="catalog-card-image">
+            <img src="https://fortuneprom.kz/image/catalog/image/catalog/data/gen1/generator-alteco-agg-11000-e2.jpg" alt="Генераторы" />
+          </div>
+          <div class="catalog-card-content">
+            <h3 class="catalog-card-title">Генераторы</h3>
+            <p class="catalog-card-desc">Дизельные, бензиновые, в кожухе, открытого типа</p>
+            <a href="https://fortuneprom.kz/promyshlennye-generatory" class="catalog-card-link">Смотреть товары <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="catalog-card">
+          <div class="catalog-card-image">
+            <img src="https://fortuneprom.kz/image/catalog/image/catalog/easyphoto/2393/elektrycheskaya-g-p-1-0-t-6-m.jpg" alt="Грузоподъёмное оборудование" />
+          </div>
+          <div class="catalog-card-content">
+            <h3 class="catalog-card-title">Грузоподъёмное оборудование</h3>
+            <p class="catalog-card-desc">Тали, лебёдки, краны, комплектующие</p>
+            <a href="https://fortuneprom.kz/gruzopodemnoe-oborudovanie" class="catalog-card-link">Смотреть товары <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Products -->
+  <div class="row home-popular-row">
+    <div class="col-xs-12">
+      <div class="home-section-header">
+        <h2 class="home-section-title">Популярные товары</h2>
+        <a href="https://fortuneprom.kz/index.php?route=product/special" class="home-section-link">Смотреть все товары <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="home-popular-grid">
+        <div class="product-card">
+          <div class="product-card-image">
+            <img src="https://fortuneprom.kz/image/catalog/image/catalog/easyphoto/2174/motor-reduktory-seryy-motovario-nmrv-y-nmrv-p.jpg" alt="Червячный редуктор NMRV-075" />
+            <span class="product-card-badge">sale</span>
+          </div>
+          <div class="product-card-content">
+            <h3 class="product-card-title"><a href="https://fortuneprom.kz/reduktory">Червячный редуктор NMRV-075</a></h3>
+            <p class="product-card-model">Момент до 179 Н·м · Передаточное число i=5–100</p>
+            <div class="product-card-price">от 128 000 ₸</div>
+            <div class="product-card-stock">В наличии</div>
+            <div class="product-card-actions">
+              <a href="https://wa.me/77775887716?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%A7%D0%B5%D1%80%D0%B2%D1%8F%D1%87%D0%BD%D1%8B%D0%B9%20%D1%80%D0%B5%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D1%80%20NMRV-075" class="btn btn-primary" target="_blank"><i class="fa fa-whatsapp"></i> Запросить цену</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-image">
+            <img src="https://fortuneprom.kz/image/cache/catalog/dvig/18794.970-200x200.png" alt="Электродвигатель АИР 160 М4" />
+          </div>
+          <div class="product-card-content">
+            <h3 class="product-card-title"><a href="https://fortuneprom.kz/electrodvigateli">Электродвигатель АИР 160 М4 18,5 кВт</a></h3>
+            <p class="product-card-model">Мощность: 18,5 кВт · Обороты: 1500 об/мин</p>
+            <div class="product-card-price">от 245 000 ₸</div>
+            <div class="product-card-stock">В наличии</div>
+            <div class="product-card-actions">
+              <a href="https://wa.me/77775887716?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%B4%D0%B2%D0%B8%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%20%D0%90%D0%98%D0%A0%20160%20%D0%9C4" class="btn btn-primary" target="_blank"><i class="fa fa-whatsapp"></i> Запросить цену</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-image">
+            <img src="https://fortuneprom.kz/image/cache/catalog/nasosi/skvaj/SkvazhinnijNasosECV10-160-100(nro)-200x200.jpg" alt="Насос скважинный ЭЦВ 10-200-75" />
+          </div>
+          <div class="product-card-content">
+            <h3 class="product-card-title"><a href="https://fortuneprom.kz/nasosnoe-oborudovanie">Насос скважинный ЭЦВ 10-200-75</a></h3>
+            <p class="product-card-model">Подача: 10 м³/ч · Напор: 200 м</p>
+            <div class="product-card-price">от 390 000 ₸</div>
+            <div class="product-card-stock">В наличии</div>
+            <div class="product-card-actions">
+              <a href="https://wa.me/77775887716?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%9D%D0%B0%D1%81%D0%BE%D1%81%20%D1%81%D0%BA%D0%B2%D0%B0%D0%B6%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%AD%D0%A6%D0%92%2010-200-75" class="btn btn-primary" target="_blank"><i class="fa fa-whatsapp"></i> Запросить цену</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-image">
+            <img src="https://fortuneprom.kz/image/catalog/image/catalog/easyphoto/2174/motor-reduktory-seryy-motovario-nmrv-y-nmrv-p.jpg" alt="Цилиндрический редуктор 1Ц2У-125" />
+          </div>
+          <div class="product-card-content">
+            <h3 class="product-card-title"><a href="https://fortuneprom.kz/reduktory">Цилиндрический редуктор 1Ц2У-125</a></h3>
+            <p class="product-card-model">Передаточное число: 8–31,5 · Момент до 1250 Н·м</p>
+            <div class="product-card-price">от 165 000 ₸</div>
+            <div class="product-card-stock">В наличии</div>
+            <div class="product-card-actions">
+              <a href="https://wa.me/77775887716?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%A6%D0%B8%D0%BB%D0%B8%D0%BD%D0%B4%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D1%80%D0%B5%D0%B4%D1%83%D0%BA%D1%82%D0%BE%D1%80%201%D0%A62%D0%A3-125" class="btn btn-primary" target="_blank"><i class="fa fa-whatsapp"></i> Запросить цену</a>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-card-image">
+            <img src="https://fortuneprom.kz/image/catalog/image/catalog/easyphoto/2393/elektrycheskaya-g-p-1-0-t-6-m.jpg" alt="Таль электрическая ТЭ 1,0-6,0" />
+          </div>
+          <div class="product-card-content">
+            <h3 class="product-card-title"><a href="https://fortuneprom.kz/gruzopodemnoe-oborudovanie">Таль электрическая ТЭ 1,0-6,0</a></h3>
+            <p class="product-card-model">Грузоподъёмность: 1 т · Высота подъёма: 6 м</p>
+            <div class="product-card-price">от 210 000 ₸</div>
+            <div class="product-card-stock">В наличии</div>
+            <div class="product-card-actions">
+              <a href="https://wa.me/77775887716?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%A2%D0%B0%D0%BB%D1%8C%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%A2%D0%AD%201,0-6,0" class="btn btn-primary" target="_blank"><i class="fa fa-whatsapp"></i> Запросить цену</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row">
+	{{ column_left }} 
+    {% if (column_left and column_right) %} 
+    {% set class = 'col-sm-4 col-md-6' %} 
+    {% elseif (column_left or column_right) %} 
+    {% set class = 'col-sm-8 col-md-9' %} 
+    {% else %} 
+    {% set class = 'col-sm-12' %} 
+    {% endif %} 
+    <div class="{{ class }}">
+		{{ content_bottom }} 
+	</div>
+    {{ column_right }} 
+	</div>
+</div>
+
+<!-- Why Choose Us Block -->
+<div class="box-bg-full home-why-choose-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <h2 class="why-choose-title">Почему выбирают Fortune PROM</h2>
+        <div class="why-choose-grid">
+          <div class="why-choose-item">
+            <div class="why-choose-icon"><i class="fa fa-briefcase"></i></div>
+            <div class="why-choose-content">
+              <h4 class="why-choose-item-title">Опыт и надёжность</h4>
+              <p class="why-choose-item-desc">Более 10 лет на рынке промышленного оборудования</p>
+            </div>
+          </div>
+          <div class="why-choose-item">
+            <div class="why-choose-icon"><i class="fa fa-check-circle"></i></div>
+            <div class="why-choose-content">
+              <h4 class="why-choose-item-title">Качество оборудования</h4>
+              <p class="why-choose-item-desc">Только проверенные бренды и сертифицированная продукция</p>
+            </div>
+          </div>
+          <div class="why-choose-item">
+            <div class="why-choose-icon"><i class="fa fa-user"></i></div>
+            <div class="why-choose-content">
+              <h4 class="why-choose-item-title">Индивидуальный подход</h4>
+              <p class="why-choose-item-desc">Подбираем оборудование под вашу задачу</p>
+            </div>
+          </div>
+          <div class="why-choose-item">
+            <div class="why-choose-icon"><i class="fa fa-tags"></i></div>
+            <div class="why-choose-content">
+              <h4 class="why-choose-item-title">Выгодные условия</h4>
+              <p class="why-choose-item-desc">Конкурентные цены и гибкая система скидок</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="why-choose-cta">
+          <h3 class="cta-title">Нужна помощь с подбором?</h3>
+          <p class="cta-desc">Наши специалисты помогут выбрать оптимальное оборудование и подготовят коммерческое предложение</p>
+          <a href="https://wa.me/77775887716?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9D%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D1%81%20%D0%BF%D0%BE%D0%B4%D0%B1%D0%BE%D1%80%D0%BE%D0%BC%20%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F." class="cta-btn btn btn-primary" target="_blank"><i class="fa fa-whatsapp"></i> Связаться в WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Customer Reviews Block -->
+<div class="container">
+  <div class="row home-reviews-row">
+    <div class="col-xs-12">
+      <div class="home-section-header">
+        <h2 class="home-section-title">Отзывы наших клиентов</h2>
+        <a href="index.php?route=information/information&information_id=6" class="home-section-link">Смотреть все отзывы <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="home-reviews-container">
+        <div class="reviews-rating-block">
+          <div class="rating-value">5.0</div>
+          <div class="rating-stars">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <div class="rating-count">на основе 24 отзывов</div>
+          <button class="btn btn-primary btn-leave-review" onclick="location.href='index.php?route=information/information&information_id=6'">Оставить отзыв</button>
+        </div>
+        <div class="reviews-cards">
+          <div class="review-card">
+            <div class="review-card-header">
+              <h4 class="review-author">TOO «KazBuild»</h4>
+              <div class="review-stars">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <p class="review-text">Закупаем редукторы и двигатели не первый год. Всегда в наличии, быстрая доставка и документы в порядке. Рекомендуем!</p>
+            <div class="review-date">12 мая 2024</div>
+          </div>
+          <div class="review-card">
+            <div class="review-card-header">
+              <h4 class="review-author">TOO «Almaty Water»</h4>
+              <div class="review-stars">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <p class="review-text">Насосное оборудование отличного качества. Подобрали модель под наши задачи, всё работает без нареканий.</p>
+            <div class="review-date">28 апреля 2024</div>
+          </div>
+          <div class="review-card">
+            <div class="review-card-header">
+              <h4 class="review-author">ИП «SteelPro»</h4>
+              <div class="review-stars">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+            </div>
+            <p class="review-text">Порадовало отношение к клиентам и техническая поддержка. Нашли решение под наш бюджет.</p>
+            <div class="review-date">15 апреля 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if (position_1 is defined) %} 
+	<div class="container-fluid">
+		<div class="row">	
+		<div class="col-sm-12 pos1">
+			{% for pos1 in position_1 %}
+				{{ pos1 }} 
+			{% endfor %} 
+		</div>
+		</div>
+	</div>
+{% endif %} 
+{% if (position_2 is defined or position_3 is defined) %} 
+	<div class="box-bg-full bg_mode_pos_2">
+	<div class="container">
+		<div class="row">
+			{% if (position_2 is defined) %} 
+			<div class="col-sm-6 col-md-6 pos2">
+			{% for pos2 in position_2 %}
+				{{ pos2 }} 
+			{% endfor %} 
+			</div>
+			{% endif %} 
+			{% if (position_3 is defined) %} 
+			<div class="col-sm-6 col-md-6 pos3">
+				{% for pos3 in position_3 %}
+					{{ pos3 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% if (position_4 is defined or position_5 is defined) %} 
+	<div class="container">
+		<div class="row">
+			{% if (position_4 is defined) %} 
+			<div class="col-sm-4 col-md-3 pos4">
+				{% for pos4 in position_4 %}
+					{{ pos4 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+			{% if (position_5 is defined) %} 
+			<div class="col-sm-8 col-md-9 pos5">
+				{% for pos5 in position_5 %}
+					{{ pos5 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+		</div>
+	</div>
+{% endif %}
+{% if (position_6 is defined or position_7 is defined) %} 
+	<div class="container">
+		<div class="row">
+			{% if (position_6 is defined) %} 
+			<div class="col-sm-8 col-md-9 pos6">	
+				{% for pos6 in position_6 %}
+					{{ pos6 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+			{% if (position_7 is defined) %} 
+			<div class="col-sm-4 col-md-3 pos7">	
+				{% for pos7 in position_7 %}
+					{{ pos7 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+		</div>
+	</div>
+{% endif %}
+{% if (position_8 is defined or position_9 is defined or position_10 is defined) %} 
+	<div class="container">
+		<div class="row">
+		{% if (position_8 is defined and position_9 is defined) %} 
+		{% set class10 = 'col-sm-4 col-md-6' %} 
+		{% elseif (position_8 is defined or position_9 is defined) %} 
+		{% set class10 = 'col-sm-8 col-md-9' %} 
+		{% else %} 
+		{% set class10 = 'col-sm-12' %} 
+		{% endif %} 
+			{% if (position_8 is defined) %} 
+				<div class="col-sm-4 col-md-3 position-no-owl pos8">
+					{% for pos8 in position_8 %}
+						{{ pos8 }} 
+					{% endfor %} 
+				</div>
+			{% endif %} 
+			{% if (position_9 is defined) %} 
+				<div class="col-sm-4 col-md-3 position-no-owl pos9">
+					{% for pos9 in position_9 %}
+						{{ pos9 }} 
+					{% endfor %} 
+				</div>
+			{% endif %} 
+			{% if (position_10 is defined) %} 
+				<div class="{{ class10 }} position-no-owl pos10">
+					{% for pos10 in position_10 %}
+						{{ pos10 }} 
+					{% endfor %} 
+				</div>
+			{% endif %} 
+		</div>
+	</div>
+{% endif %} 
+{% if (position_22 is defined) %} 
+	<div class="box-bg-full bg_mode_pos_22">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 pos22">
+			{% for pos22 in position_22 %}
+				{{ pos22 }} 
+			{% endfor %} 
+			</div>
+		</div>
+	</div>
+	</div>
+{% endif %} 
+{% if (position_11 is defined or position_12 is defined or position_13 is defined or position_14 is defined) %} 
+	<div class="box-bg-full bg_mode_pos_11">
+	<div class="container">
+		<div class="row">
+			{% if (position_11 is defined) %} 
+			<div class="col-sm-6 col-md-3 position-no-owl pos11">	
+				{% for pos11 in position_11 %}
+					{{ pos11 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+			{% if (position_12 is defined) %} 
+			<div class="col-sm-6 col-md-3 position-no-owl pos12">	
+				{% for pos12 in position_12 %}
+					{{ pos12 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+			{% if (position_13 is defined) %} 
+			<div class="col-sm-6 col-md-3 position-no-owl pos13">	
+				{% for pos13 in position_13 %}
+					{{ pos13 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+			{% if (position_14 is defined) %} 
+			<div class="col-sm-6 col-md-3 position-no-owl pos14">	
+				{% for pos14 in position_14 %}
+					{{ pos14 }} 
+				{% endfor %} 
+			</div>
+			{% endif %} 
+		</div>
+	</div>
+</div>
+{% endif %}
+{% if (position_15 is defined) %}
+	<div class="box-bg-full bg_mode_pos_15">
+	<div class="container">
+		<div class="row">
+		<div class="col-sm-12 pos15">
+			{% for pos15 in position_15 %}
+				{{ pos15 }} 
+			{% endfor %} 
+		</div>
+		</div>
+	</div>
+	</div>
+{% endif %} 
+{% if (position_16 is defined) %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 pos16">
+			{% for pos16 in position_16 %}
+				{{ pos16 }} 
+			{% endfor %} 
+			</div>
+		</div>
+	</div>
+{% endif %} 
+{{ footer }}

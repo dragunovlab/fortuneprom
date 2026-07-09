@@ -233,35 +233,75 @@ class Response {
 		
 		// Homepage SEO cleanup
 		if ($route === 'common/home' || $route === '') {
-			// Convert title-module divs to H2
 			$this->output = preg_replace_callback('/<div[^>]*class="title-module"[^>]*>(.+?)<\/div>/isu', function($m) {
 				$inner = preg_replace('/<\/?span[^>]*>/iu', '', $m[1]);
 				return '<h2 class="title-module">' . trim($inner) . '</h2>';
 			}, $this->output);
-			// Add H1 before first container-module (main content area)
 			if (stripos($this->output, '<h1') === false) {
 				$h1Text = html_entity_decode('&#1055;&#1088;&#1086;&#1084;&#1099;&#1096;&#1083;&#1077;&#1085;&#1085;&#1086;&#1077; &#1086;&#1073;&#1086;&#1088;&#1091;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077; FORTUNE PROM &#1074; &#1050;&#1072;&#1079;&#1072;&#1093;&#1089;&#1090;&#1072;&#1085;&#1077;', ENT_QUOTES, 'UTF-8');
 				$h1 = '<div class="container"><h1 class="seo-homepage-h1" style="font-size:22px;margin:20px 0 15px;color:#333;">' . $h1Text . '</h1></div>';
 				$this->output = preg_replace('/(<div[^>]*class="container-module"[^>]*>)/i', $h1 . '$1', $this->output, 1);
 			}
 		}
-		// end Homepage SEO cleanup
-		
-		// Homepage SEO cleanup
-		if ($route === 'common/home' || $route === '') {
-			// Convert title-module divs to H2
-			$this->output = preg_replace_callback('/<div[^>]*class="title-module"[^>]*>(.+?)<\/div>/isu', function($m) {
-				$inner = preg_replace('/<\/?span[^>]*>/iu', '', $m[1]);
-				return '<h2 class="title-module">' . trim($inner) . '</h2>';
-			}, $this->output);
-			// Add H1 if missing - place before first container-module
-			if (stripos($this->output, '<h1') === false) {
-				$h1Text = html_entity_decode('&#1055;&#1088;&#1086;&#1084;&#1099;&#1096;&#1083;&#1077;&#1085;&#1085;&#1086;&#1077; &#1086;&#1073;&#1086;&#1088;&#1091;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077; FORTUNE PROM &#1074; &#1050;&#1072;&#1079;&#1072;&#1093;&#1089;&#1090;&#1072;&#1085;&#1077;', ENT_QUOTES, 'UTF-8');
-				$h1 = '<div class="container"><h1 class="seo-homepage-h1" style="font-size:22px;margin:20px 0 15px;color:#333;">' . $h1Text . '</h1></div>';
-				$this->output = preg_replace('/(<div[^>]*class="container-module"[^>]*>)/i', $h1 . '$1', $this->output, 1);
+		// HTML cleanup
+			// Fix homepage layout: wrap bare rows in .container and close them properly
+			$sections = array(
+				'Trust Badges Block' => '<!-- Catalog of Equipment Grid -->',
+				'Catalog of Equipment Grid' => '<!-- Popular Products -->',
+				'Popular Products' => '<!-- Why Choose Us Block -->'
+			);
+			foreach ($sections as $sec => $next) {
+				$comment = "<!-- $sec -->";
+				$pos = strpos($this->output, $comment);
+				if ($pos !== false) {
+					$start = max(0, $pos - 120);
+					$before = substr($this->output, $start, $pos - $start);
+					if (strpos($before, '<div class="container"') === false && strpos($before, '<div class=\'container\'') === false) {
+						$this->output = substr_replace($this->output, '<div class="container">' . "\n  ", $pos, 0);
+						// Add closing </div> before the next section
+						$nextPos = strpos($this->output, $next, $pos + 100);
+						if ($nextPos !== false) {
+							$closeTag = "\n" . '</div>' . "\n\n  ";
+							$this->output = substr_replace($this->output, $closeTag, $nextPos, 0);
+						}
+					}
+				}
 			}
-		}
-		// end Homepage SEO cleanup
+			// Remove stray </div> before Why Choose (from stale cached template)
+			$this->output = preg_replace('/<\/div>\s*\n\s*<!-- Why Choose Us Block -->/', '<!-- Why Choose Us Block -->', $this->output);
+			// Remove empty h3 in footer
+			$this->output = preg_replace('/<h3>\s*<\/h3>/', '', $this->output);
+			// Fix price_format JS error
+			$this->output = str_replace('n = n * ;', 'n = n * 1;', $this->output);
+			// Remove empty inline Organization schema (handle nested spans)
+			$pos = strpos($this->output, '<span itemscope itemtype="http://schema.org/Organization">');
+			if ($pos !== false) {
+			    $depth = 0;
+			    $start = $pos;
+			    $len = strlen($this->output);
+			    for ($i = $pos; $i < $len; $i++) {
+			        if (substr($this->output, $i, 6) === '<span ') { $depth++; $i += 5; }
+			        elseif (substr($this->output, $i, 7) === '</span>') { $depth--; $i += 6; if ($depth == 0) { $end = $i + 1; break; } }
+			    }
+			    if (isset($end) && $end > $start) {
+			        $this->output = substr($this->output, 0, $start) . substr($this->output, $end);
+			    }
+			}
+			// Fix banner lazy loading: convert data-src to src for owl-carousel slides
+			$this->output = preg_replace('/<img([^>]+)data-src="([^"]+)"([^>]*)class="([^"]*)lazyOwl([^"]*)"([^>]*)>/i', '<img$1src="$2"$3class="$4$5"$6>', $this->output);
+			// Fix slideshow lazyLoad conflict: disable it since images already have src
+			$this->output = preg_replace('/lazyLoad\s*:\s*true/i', 'lazyLoad: false', $this->output);
+			// Fix slideshow items count: set items:1 for #slideshow0 (banners module sets items:6)
+			$this->output = preg_replace('/(#slideshow0.*?items:\s*)\d+/s', '${1}1', $this->output);
+			// Load owl.carousel.css if not already loaded
+			if (strpos($this->output, 'owl.carousel.css') === false) {
+				$this->output = str_replace('</head>', '<link href="catalog/view/javascript/jquery/owl-carousel/owl.carousel.css" rel="stylesheet" />' . "\n</head>", $this->output);
+			}
+			// Inject menu-aim.js after jQuery (bypasses OCMod template overrides)
+			if (strpos($this->output, 'jquery.menu-aim.js') === false) {
+				$this->output = str_replace('catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script>', 'catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script><script src="catalog/view/theme/newstore/js/jquery.menu-aim.js"></script>', $this->output);
+			}
+
 		// Render
 			$schemaHtml = '';
 			foreach ($schemas as $s) {

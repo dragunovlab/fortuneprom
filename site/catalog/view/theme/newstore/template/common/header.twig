@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if (description) %}<meta name="description" content="{{ description }}" />{% endif %}
+
+{% if (keywords) %}<meta name="keywords" content= "{{ keywords }}" />{% endif %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% for link in links %}<link href="{{ link['href'] }}" rel="{{ link['rel'] }}" />{% endfor %}
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="preload" as="style" />
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<style>
+@font-face {font-display:swap;font-family: 'Roboto Condensed';src: local('Roboto Condensed'), local('RobotoCondensed-Regular'), url('catalog/view/theme/newstore/stylesheet/fonts/Robotocondensed.woff2') format('woff2'), url('catalog/view/theme/newstore/stylesheet/fonts/Robotocondensed.woff') format('woff'), url('catalog/view/theme/newstore/stylesheet/fonts/Robotocondensed.ttf') format('truetype');font-weight: 400;font-style: normal;}
+@font-face {font-display:swap;font-family: 'Roboto Condensed';src: local('Roboto Condensed Bold'), local('RobotoCondensed-Bold'), url('catalog/view/theme/newstore/stylesheet/fonts/Robotocondensedbold.woff2') format('woff2'), url('catalog/view/theme/newstore/stylesheet/fonts/Robotocondensedbold.woff') format('woff'), url('catalog/view/theme/newstore/stylesheet/fonts/Robotocondensedbold.ttf') format('truetype');font-weight: 600;font-style: normal;}
+@font-face {font-display:swap;font-family:'FontAwesome';src:url('catalog/view/theme/newstore/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');src:url('catalog/view/theme/newstore/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('catalog/view/theme/newstore/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('catalog/view/theme/newstore/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('catalog/view/theme/newstore/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('catalog/view/theme/newstore/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
+@font-face {font-display:swap;font-family:'Marck Script';src: url('catalog/view/theme/newstore/stylesheet/fonts/MarckScriptRegular.ttf');}
+</style>
+{{ cssnewstore }}
+{% if (minifycss) %}
+{% for style in styles %}<link href="{{ style['href'] }}" rel="{{ style['rel'] }}" media="{{ style['media'] }}" />{% endfor %}
+{% endif %}
+{% if (config_ns_themes_custom_bg_mode) %}
+{% if (config_themes_custom_bg_img_preview !='') %}
+<style>body {background:url('image/{{ config_themes_custom_bg_img_preview }}'){% if (config_themes_custom_bg_repeat) %} {{ config_themes_custom_bg_repeat }} {% endif %} {% if (config_themes_custom_bg_attachment) %} {{ config_themes_custom_bg_attachment }} {% endif %} {% if (config_themes_custom_bg_position) %} {{ config_themes_custom_bg_position }} {% endif %};}</style>
+{% endif %}
+{% elseif(config_ns_themes_custom_bg_mode_color !='') %}
+<style>body{background-color: {{ config_ns_themes_custom_bg_mode_color }};}</style>
+{% endif %}
+{% if (config_on_off_shopping_cart_hover == '1') %}<style>#cart:hover .dropdown-menu{display:block;}#cart:hover .dropdown-menu:before{content:"";position:absolute;top:-7px;width:100%;height:9px;background:transperent;}#cart:hover .car-down{-webkit-transform: rotate(-180deg);transform: rotate(-180deg);}</style>{% endif %}
+{% if (nst_data.header_bg_mode is defined and (nst_data.header_bg_mode == '1')) %}
+{% if (nst_data.header_bg_img) %}<style>header {margin-bottom:10px;background:url('image/{{ nst_data.header_bg_img }}'){% if (nst_data.header_bg_repeat) %} {{ nst_data.header_bg_repeat }} {% endif %} {% if (nst_data.header_bg_position) %} {{ nst_data.header_bg_position }} {% endif %};}</style>{% endif %}
+{% elseif (nst_data.header_bg_mode is defined and (nst_data.header_bg_mode == '0')) %}
+{% if (nst_data.header_bg_mode_color != '') %}<style>header {margin-bottom:10px;background-color: {{ nst_data.header_bg_mode_color }};}</style>{% endif %}
+{% endif %}
+{% if (nst_data.defaut_display_view is defined) %}<script>
+if (localStorage.getItem('display') === null) {localStorage.setItem('display', '{{ nst_data.defaut_display_view }}');}</script>{% endif %}
+{% if (nst_data.nsfullwidth is defined and (nst_data.nsfullwidth == 1)) %}
+<style>
+@media (max-width: 520px) {
+.product-slider .owl-item .item {margin:0px 5px;}
+.product-slider {margin:0px -5px;}
+}
+@media (min-width: 1360px){
+.container { width: calc(100% - 20px);}
+header .col-md-3.logo-top {width:20%;}
+header .col-md-3.menu-box {width:20%;}
+header .dop-right-menu {width:80%;}
+header .phone-box.col-md-3.col-md-push-4 {left: 42%;}
+header .phone-box.col-md-3.col-md-push-5 {left: 48%;}
+header .box-search.col-md-4.col-md-pull-2 {width:42%;right:13%}
+header .box-search.col-md-4.col-md-pull-5 {width:42%;right:38%}
+header .box-search.col-md-5.col-md-pull-4 {width:48%;right:32%}
+header .box-search.col-md-5.col-md-pull-1 {width:48%;right:7%}
+header .col-md-9.col-md-push-3 {width:80%;left:20%}
+header .box-cart.col-md-2.col-md-push-4 {width:13%;left:42%}
+header .box-cart.col-md-1.col-md-push-5{width:7%;left:48%}
+.breadcrumb.col-lg-offset-3, .breadcrumb.col-md-offset-3 {margin-left: 20.4%;}
+.container .sw-80 {width: 80%;}
+.container .sw-20 {width: 20%;}
+#content.col-md-9 {width: 80%;}
+#content.col-sm-9 {width: 80%;}
+#column-left.col-md-3,#column-right.col-md-3{ width:20%;}
+}
+</style>
+{% else %}
+<style>
+.product-grid.grid4.col-1 .actions .cart .btn-general {padding:7.5px 6px;}
+.product-grid.grid4.col-1 .actions .cart i {display:none;}
+.product-grid.grid4.col-lg-1-5 .actions .cart .btn-general {padding:7.5px 6px;}
+.product-grid.grid4.col-lg-1-5 .actions .cart i {display:none;}
+</style>
+{% endif %}
+<style>
+.sticker-ns.popular .fa{color:{{ config_change_color_icon_sticker_popular }}}
+.sticker-ns.popular{background: {{ config_change_background_sticker_popular }} none repeat scroll 0 0;color:{{ config_change_color_text_sticker_popular }};}
+.sticker-ns.special .fa{color:{{ config_change_color_icon_sticker_special }}}
+.sticker-ns.special{background: {{ config_change_background_sticker_special }} none repeat scroll 0 0;color:{{ config_change_color_text_sticker_special }};}
+.sticker-ns.bestseller .fa{color:{{ config_change_color_icon_sticker_topbestseller }}}
+.sticker-ns.bestseller{background: {{ config_change_background_sticker_topbestseller }} none repeat scroll 0 0;color:{{ config_change_color_text_sticker_topbestseller }};}
+.sticker-ns.newproduct .fa{color:{{ config_change_color_icon_sticker_newproduct }}}
+.sticker-ns.newproduct{background: {{ config_change_background_sticker_newproduct }} none repeat scroll 0 0;color:{{ config_change_color_text_sticker_newproduct }};}
+</style>
+{{ jsnewstore }}
+{% if (minifyjs) %}
+{% for script in scripts %}<script src="{{ script }}"></script>{% endfor %}
+{% endif %}
+<script>
+(function() {
+	var scripts = [
+		'catalog/view/javascript/jquery/jquery-2.1.1.min.js',
+		'catalog/view/javascript/bootstrap/js/bootstrap.min.js',
+		'catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js',
+		'catalog/view/theme/newstore/js/jquery.menu-aim.js',
+		'catalog/view/javascript/common.js',
+		'catalog/view/theme/newstore/js/common.js'
+	];
+
+	function hasScript(src) {
+		return !!document.querySelector('script[src*="' + src + '"]');
+	}
+
+	for (var i = 0; i < scripts.length; i++) {
+		if (!hasScript(scripts[i])) {
+			document.write('<script src="' + scripts[i] + '"><\\/script>');
+		}
+	}
+})();
+</script>
+<script>
+function init(elem, options){
+elem.addClass('countdownHolder');
+$.each(['Days','Hours','Minutes','Sec'],function(i){
+var clas;
+if (this=='Days') {clas="{{ days }}";}
+if (this=='Hours') {clas="{{ hours }}";}
+if (this=='Minutes') {clas="{{ minutes }}";}
+if (this=='Sec') {clas="{{ sec }}";}
+out_timer = "";
+out_timer += '<span class="count'+this+'">';
+out_timer += '<span class="num-time">';
+out_timer += '<span class="position"><span class="digit static">0</span></span>';
+out_timer += '<span class="position"><span class="digit static">0</span></span>';
+out_timer += '</span>';
+out_timer += '<span class="time_productany">'+clas+'</span>';
+out_timer += '</span>';
+$(out_timer).appendTo(elem);
+});
+}
+var button_shopping = "{{ button_shopping }}";
+var button_checkout = "{{ button_checkout }}";
+var link_checkout = "{{ checkout }}";
+var link_newstorecheckout = "{{ newstorecheckout }}";
+var text_showmore = '{{ text_showmore}}';
+var color_schem = '{{ color_schem}}';
+var loading_masked_img = '<img src="catalog/view/theme/newstore/image/ring-alt-'+ color_schem +'.svg" />';
+function loading_masked(action) {
+	if (action) {
+		$('.loading_masked').html(loading_masked_img);
+		$('.loading_masked').show();
+	} else {
+		$('.loading_masked').html('');
+		$('.loading_masked').hide();
+	}
+}
+function creatOverlayLoadPage(action) {
+	if (action) {
+		$('#messageLoadPage').html(loading_masked_img);
+		$('#messageLoadPage').show();
+	} else {
+		$('#messageLoadPage').html('');
+		$('#messageLoadPage').hide();
+	}
+}
+</script>
+{% if (on_off_search == '1') %}
+<script>var text_autosearch_view_all = "{{ text_autosearch_view_all }}";</script>
+{% endif %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+{% if (hbannerpc[lang_id]['image'] is defined) %}<style>.htop-b-pc img {margin:0 auto;}</style>{% endif %}
+{% if (hbannermob[lang_id]['image'] is defined and (hbannermob[lang_id]['image'] != '')) %}<style>.htop-b-mob img {margin:0 auto;}
+{% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}.htop-b-mob{padding-top:50px;}{% endif %}
+{% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}header.pad-top{padding-top:5px;}{% endif %}</style>{% endif %}
+<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260708e" rel="stylesheet" media="screen" />
+<script>
+document.addEventListener("click", function(e) {
+  var btn = e.target.closest(".product-thumb .btn-wishlist");
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    var thumb = btn.closest(".product-thumb");
+    var titleEl = thumb.querySelector(".product-name a");
+    var title = titleEl ? titleEl.textContent.trim() : "";
+    var url = "https://wa.me/77775887716?text=" + encodeURIComponent("Здравствуйте! Интересует цена на товар: " + title);
+    window.open(url, "_blank");
+  }
+});
+</script>
+<script>
+document.addEventListener("click", function(e) {
+  var btn = e.target.closest(".product-thumb .btn-wishlist");
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    var thumb = btn.closest(".product-thumb");
+    var titleEl = thumb.querySelector(".product-name a");
+    var title = titleEl ? titleEl.textContent.trim() : "";
+    var url = "https://wa.me/77775887716?text=" + encodeURIComponent("Здравствуйте! Интересует цена на товар: " + title);
+    window.open(url, "_blank");
+  }
+});
+</script>
+</head>
+<body class="{{ class }}">
+{% if (hbannerpc[lang_id]['image'] is defined and (hbannerpc[lang_id]['image'] != '')) %}
+<div class="htop-b-pc hidden-xs hidden-sm" {% if (nst_data['hbannerpc'][lang_id]['bg'] is defined and (nst_data['hbannerpc'][lang_id]['bg'] != '')) %}style="background:{{ nst_data['hbannerpc'][lang_id]['bg'] }}"{% endif %}>
+{% if nst_data['hbannerpc'][lang_id]['link'] is not empty %}
+  <a href="{{ nst_data['hbannerpc'][lang_id]['link'] }}">
+{% else %}
+  <span>
+{% endif %}
+
+  {{ nst_data['hbannerpc'][lang_id]['title'] }}
+
+{% if nst_data['hbannerpc'][lang_id]['link'] is not empty %}
+  </a>
+{% else %}
+  </span>
+{% endif %}
+	<img src="{{ hbannerpc[lang_id]['image'] }}" alt="" class="img-responsive" />
+</a>
+</div>
+{% endif %}
+{% if (hbannermob[lang_id]['image'] is defined and (hbannermob[lang_id]['image'] != '')) %}
+<div class="htop-b-mob visible-xs visible-sm" {% if (nst_data['hbannermob'][lang_id]['bg'] is defined and (nst_data['hbannermob'][lang_id]['bg'] != '')) %}style="background:{{ nst_data['hbannermob'][lang_id]['bg'] }}"{% endif %}>
+{% if nst_data['hbannerpc'][lang_id]['link'] is not empty %}
+  <a href="{{ nst_data['hbannerpc'][lang_id]['link'] }}">
+{% else %}
+  <span>
+{% endif %}
+
+  {{ nst_data['hbannerpc'][lang_id]['title'] }}
+
+{% if nst_data['hbannerpc'][lang_id]['link'] is not empty %}
+  </a>
+{% else %}
+  </span>
+{% endif %}
+	<img src="{{ hbannermob[lang_id]['image'] }}" class="img-responsive" />
+</a>
+</div>
+{% endif %}
+<p id="back-top"><a rel="nofollow" class="btn btn-default" href="#top"><i class="fa fa-chevron-up" style="font-size:18px;"></i></a></p>
+<div id="login-form-popup" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{ text_login }}</h4>
+				</div>
+				<div class="modal-body">
+				<div class="form-group">
+					<div class="message"></div>
+				</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+							<input type="text" name="emailpopup" value="" placeholder="{{ entry_email|replace({ (':'): '' }) }}" id="input-email-popup" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input type="password" name="passwordpopup" value="" placeholder="{{ entry_password|replace({ (':'): '' }) }}" id="input-password-popup" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group text-center">
+						<a href="{{ register }}">{{ text_register }}</a> | <a href="{{ forgotten }}">{{ text_forgotten }}</a>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" value="{{ button_login }}" id="button-login-popup" class="btn-login btn-block" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<nav id="top">
+  <div class="container">
+    <div class="top-bar-flex">
+      <div class="top-bar-left hidden-xs hidden-sm">
+        <span class="top-info-item"><i class="fa fa-truck"></i> Доставка по всему Казахстану</span>
+        <span class="top-info-item"><i class="fa fa-shield"></i> Официальная гарантия 12 месяцев</span>
+        <span class="top-info-item"><i class="fa fa-briefcase"></i> Работаем с ТОО и ИП</span>
+        <span class="top-info-item"><i class="fa fa-cogs"></i> Подбор оборудования под задачу</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="index.php?route=information/information&information_id=4" class="top-link">О компании</a>
+        <a href="index.php?route=information/news" class="top-link">Новости</a>
+        <a href="index.php?route=information/information&information_id=6" class="top-link">Доставка и оплата</a>
+        <a href="index.php?route=information/contact" class="top-link">Контакты</a>
+        
+        <div class="box-account-inline">
+          <a href="{{ account }}" class="top-link"><i class="fa fa-user-circle-o"></i> Личный кабинет</a>
+        </div>
+        
+        <div style="display:none;">
+          {{ currency }}
+          {{ language }}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<header {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}class="pad-top"{% endif %}>
+<div class="container">
+<div class="row vertical-align">
+      <div class="col-xs-6 col-sm-12 col-md-3 text-center text-left-md logo-top">
+        <div id="logo">
+        {% if (logo) %}
+            {% if (home == home_page) %}
+              <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" />
+            {% else %}
+              <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+            {% endif %}
+          {% else %}
+            <h1><a href="{{ home }}">{{ name }}</a></h1>
+          {% endif %}
+        </div>
+      </div>
+		<div class="phone-box col-xs-6 col-sm-12 col-md-3 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %}{% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-md-push-5{% else %}col-md-push-4{% endif %}{% endif %} text-xs-center text-sm-center text-md-center">
+			<div id="phone">
+				<div class="contact-header">
+					<div class="dropdown-toggle">
+						<div class="additional-tel dth">
+							<a href="tel:+77775887716"><div class="icon-image"><i class="fa fa-phone"></i></div> +7 777 588 77 16</a>
+						</div>
+						<div class="additional-tel dth">
+							<a href="https://wa.me/77787887716" target="_blank"><div class="icon-image"><i class="fa fa-whatsapp"></i></div> +7 778 788 77 16</a>
+						</div>
+					</div>
+					<div class="text_after_phone">Отдел снабжения</div>
+				</div>
+			</div>
+	  </div>
+	  <div class="box-cart {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}hidden-xs{% endif %} col-xs-12 {% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-sm-4 col-sm-push-8 col-md-1 col-md-push-5 {% else %}col-xs-12 col-sm-4 col-md-2 col-md-push-4 col-sm-push-8{% endif %}">{{ cart }}</div>
+      <div class="box-search {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}hidden-xs{% endif %} col-xs-12 {% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-sm-8 col-sm-pull-4 col-md-5 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %} col-md-pull-4{% else %}col-md-pull-1{% endif %}{% else %} col-sm-8 col-md-4 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %} col-md-pull-5 col-sm-pull-4{% else %}col-sm-pull-4 col-md-pull-2{% endif %}{% endif %} search-top">{{ search }}</div>
+	</div>
+</div>
+{{ menuns }}
+</header>
