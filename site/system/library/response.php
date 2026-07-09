@@ -244,31 +244,6 @@ class Response {
 			}
 		}
 		// HTML cleanup
-			// Fix homepage layout: wrap bare rows in .container and close them properly
-			$sections = array(
-				'Trust Badges Block' => '<!-- Catalog of Equipment Grid -->',
-				'Catalog of Equipment Grid' => '<!-- Popular Products -->',
-				'Popular Products' => '<!-- Why Choose Us Block -->'
-			);
-			foreach ($sections as $sec => $next) {
-				$comment = "<!-- $sec -->";
-				$pos = strpos($this->output, $comment);
-				if ($pos !== false) {
-					$start = max(0, $pos - 120);
-					$before = substr($this->output, $start, $pos - $start);
-					if (strpos($before, '<div class="container"') === false && strpos($before, '<div class=\'container\'') === false) {
-						$this->output = substr_replace($this->output, '<div class="container">' . "\n  ", $pos, 0);
-						// Add closing </div> before the next section
-						$nextPos = strpos($this->output, $next, $pos + 100);
-						if ($nextPos !== false) {
-							$closeTag = "\n" . '</div>' . "\n\n  ";
-							$this->output = substr_replace($this->output, $closeTag, $nextPos, 0);
-						}
-					}
-				}
-			}
-			// Remove stray </div> before Why Choose (from stale cached template)
-			$this->output = preg_replace('/<\/div>\s*\n\s*<!-- Why Choose Us Block -->/', '<!-- Why Choose Us Block -->', $this->output);
 			// Remove empty h3 in footer
 			$this->output = preg_replace('/<h3>\s*<\/h3>/', '', $this->output);
 			// Fix price_format JS error
