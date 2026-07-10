@@ -89,31 +89,15 @@ header .box-cart.col-md-1.col-md-push-5{width:7%;left:48%}
 .sticker-ns.newproduct{background: {{ config_change_background_sticker_newproduct }} none repeat scroll 0 0;color:{{ config_change_color_text_sticker_newproduct }};}
 </style>
 {{ jsnewstore }}
-{% if (minifyjs) %}
-{% for script in scripts %}<script src="{{ script }}"></script>{% endfor %}
-{% endif %}
-<script>
-(function() {
-	var scripts = [
-		'catalog/view/javascript/jquery/jquery-2.1.1.min.js',
-		'catalog/view/javascript/bootstrap/js/bootstrap.min.js',
-		'catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js',
-		'catalog/view/theme/newstore/js/jquery.menu-aim.js',
-		'catalog/view/javascript/common.js',
-		'catalog/view/theme/newstore/js/common.js'
-	];
-
-	function hasScript(src) {
-		return !!document.querySelector('script[src*="' + src + '"]');
-	}
-
-	for (var i = 0; i < scripts.length; i++) {
-		if (!hasScript(scripts[i])) {
-			document.write('<script src="' + scripts[i] + '"><\\/script>');
-		}
-	}
-})();
-</script>
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<script src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js"></script>
+<script src="catalog/view/theme/newstore/js/jquery.menu-aim.js"></script>
+<script src="catalog/view/javascript/common.js"></script>
+<script src="catalog/view/theme/newstore/js/common.js"></script>
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
 <script>
 function init(elem, options){
 elem.addClass('countdownHolder');
@@ -170,7 +154,7 @@ function creatOverlayLoadPage(action) {
 {% if (hbannermob[lang_id]['image'] is defined and (hbannermob[lang_id]['image'] != '')) %}<style>.htop-b-mob img {margin:0 auto;}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}.htop-b-mob{padding-top:50px;}{% endif %}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}header.pad-top{padding-top:5px;}{% endif %}</style>{% endif %}
-<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260708e" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260709a" rel="stylesheet" media="screen" />
 <script>
 document.addEventListener("click", function(e) {
   var btn = e.target.closest(".product-thumb .btn-wishlist");
@@ -255,13 +239,13 @@ document.addEventListener("click", function(e) {
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-							<input type="text" name="emailpopup" value="" placeholder="{{ entry_email|replace({ (':'): '' }) }}" id="input-email-popup" class="form-control" />
+							<input type="text" name="emailpopup" value="" placeholder="{{ entry_email|replace({ (':'): '' }) }}" id="input-email-popup" class="form-control" autocomplete="username" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input type="password" name="passwordpopup" value="" placeholder="{{ entry_password|replace({ (':'): '' }) }}" id="input-password-popup" class="form-control" />
+							<input type="password" name="passwordpopup" value="" placeholder="{{ entry_password|replace({ (':'): '' }) }}" id="input-password-popup" class="form-control" autocomplete="current-password" />
 						</div>
 					</div>
 					<div class="form-group text-center">

@@ -38,14 +38,47 @@ a:focus {
   color: var(--fp-primary-dark);
 }
 
-@media (min-width: 1200px) {
-  .container {
-    width: 1180px;
+.container,
+.home-trust-badges-row,
+.home-catalog-row,
+.home-popular-row,
+.home-reviews-row {
+  width: 1200px !important;
+  max-width: calc(100vw - 32px) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  float: none !important;
+}
+
+@media (max-width: 1219px) {
+  .container,
+  .home-trust-badges-row,
+  .home-catalog-row,
+  .home-popular-row,
+  .home-reviews-row {
+    width: 970px !important;
   }
 }
 
-.container {
-  max-width: calc(100vw - 32px);
+@media (max-width: 991px) {
+  .container,
+  .home-trust-badges-row,
+  .home-catalog-row,
+  .home-popular-row,
+  .home-reviews-row {
+    width: 750px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .container,
+  .home-trust-badges-row,
+  .home-catalog-row,
+  .home-popular-row,
+  .home-reviews-row {
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+  }
 }
 
 /* Top utility navigation */
@@ -403,88 +436,103 @@ h1 {
 }
 
 .product-thumb {
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--fp-line);
-  border-radius: var(--fp-radius);
-  background: var(--fp-surface);
-  box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
-  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 380px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--fp-line) !important;
+  border-radius: var(--fp-radius) !important;
+  background: var(--fp-surface) !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, .05) !important;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease !important;
 }
 
 .product-thumb:hover {
-  border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
-  transform: translateY(-5px);
+  border-color: var(--fp-primary) !important;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08) !important;
+  transform: translateY(-4px) !important;
 }
 
 .product-thumb .image {
-  display: flex;
-  min-height: 190px;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 18px 16px 10px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  height: 180px !important;
+  min-height: 180px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 12px !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
 }
 
 .product-thumb .image img {
-  max-height: 180px;
-  padding-top: 0;
-  object-fit: contain;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 100% !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  transition: transform 0.4s ease !important;
 }
+
 .product-thumb:hover .image img {
-  transform: scale(1.05);
+  transform: scale(1.05) !important;
 }
 
 .product-thumb .caption {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  padding: 14px 16px 0;
-  margin-bottom: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  padding: 12px 16px 16px 16px !important;
+  background: #ffffff !important;
 }
 
-.container-module .product-name,
-.product-grid .product-name {
-  height: auto;
-  min-height: 48px;
-  margin-bottom: 10px;
-  text-align: left;
+.product-name,
+.product-thumb .product-name,
+.product-thumb h4 {
+  height: 40px !important;
+  line-height: 1.25 !important;
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  text-align: left !important;
 }
 
-.container-module .product-name a,
-.product-grid .product-thumb h4 a,
+.product-name a,
+.product-thumb .product-name a,
 .product-thumb h4 a {
-  color: var(--fp-text);
-  font-size: 17px;
-  font-weight: 800;
-  line-height: 1.22;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--fp-text) !important;
 }
 
-.container-module .product-name a:hover,
-.product-grid .product-thumb h4 a:hover,
+.product-name a:hover,
+.product-thumb .product-name a:hover,
 .product-thumb h4 a:hover {
-  color: var(--fp-primary);
+  color: var(--fp-primary) !important;
 }
 
 .price,
 .product-thumb .price {
-  color: var(--fp-text);
-  font-size: 18px;
-  font-weight: 900;
+  height: 24px !important;
+  margin-top: auto !important;
+  margin-bottom: 8px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--fp-primary) !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .price-new {
-  color: var(--fp-primary);
+  color: var(--fp-primary) !important;
 }
 
 .actions,
 .product-thumb .button-group {
-  margin-top: auto;
+  margin-top: 0 !important;
 }
 
 .btn-general,
@@ -492,13 +540,13 @@ h1 {
 #button-cart {
   border: 0;
   border-radius: 10px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  background: linear-gradient(135deg, #4fa3e3 0%, #2b8cdb 100%) !important;
   color: #fff !important;
   font-weight: 600;
   font-size: 13.5px;
   text-shadow: none;
   padding: 10px 20px;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 4px 10px rgba(43, 140, 219, 0.15);
   transition: all 0.2s ease;
 }
 
@@ -508,15 +556,15 @@ h1 {
 .btn-general:focus,
 .btn-primary:focus,
 #button-cart:focus {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+  background: linear-gradient(135deg, #2b8cdb 0%, #1475c4 100%) !important;
+  box-shadow: 0 6px 16px rgba(43, 140, 219, 0.25);
   transform: translateY(-1px);
 }
 
 .actions .cart .btn-general,
 .product-thumb .cart .btn-general {
-  min-height: 38px;
-  padding: 9px 18px;
+  min-height: 38px !important;
+  padding: 9px 18px !important;
 }
 
 .sticker-ns,
