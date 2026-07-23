@@ -154,18 +154,8 @@ function creatOverlayLoadPage(action) {
 {% if (hbannermob[lang_id]['image'] is defined and (hbannermob[lang_id]['image'] != '')) %}<style>.htop-b-mob img {margin:0 auto;}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}.htop-b-mob{padding-top:50px;}{% endif %}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}header.pad-top{padding-top:5px;}{% endif %}</style>{% endif %}
-<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260723v34" rel="stylesheet" media="screen" />
-<link href="catalog/view/theme/newstore/stylesheet/fp-layout-v2.css?v=20260722b" rel="stylesheet" media="screen" />
-<script>
-document.addEventListener("click", function(e) {
-  var btn = e.target.closest(".product-thumb .btn-wishlist");
-  if (btn) {
-    e.preventDefault();
-    e.stopPropagation();
-    var thumb = btn.closest(".product-thumb");
-    var titleEl = thumb.querySelector(".product-name a");
-    var title = titleEl ? titleEl.textContent.trim() : "";
-<link href="catalog/view/theme/newstore/stylesheet/fp-layout-v2.css?v=20260722b" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260723a" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/newstore/stylesheet/fp-layout-v2.css?v=20260723a" rel="stylesheet" media="screen" />
 <script>
 document.addEventListener("click", function(e) {
   var btn = e.target.closest(".product-thumb .btn-wishlist");
@@ -179,6 +169,15 @@ document.addEventListener("click", function(e) {
     window.open(url, "_blank");
   }
 });
+</script>
+<script>
+window.addEventListener("scroll", function() {
+  if (window.scrollY > 40) {
+    document.body.classList.add("fp-header-is-fixed");
+  } else {
+    document.body.classList.remove("fp-header-is-fixed");
+  }
+}, { passive: true });
 </script>
 <style>
 .widget-connect-left, .widget-connect-right { width: auto !important; max-width: none !important; }
