@@ -8,6 +8,65 @@ class ControllerStartupSeoUrl extends Controller {
 
 		// Decode URL
 		if (isset($this->request->get['_route_'])) {
+			$route_path = $this->request->get['_route_'];
+
+			// Try combined keyword lookup first (handles multi-segment keywords)
+			$clean_path = trim($route_path, '/');
+			$combined_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE keyword = '" . $this->db->escape($clean_path) . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
+
+			if ($combined_query->num_rows) {
+				$url = explode('=', $combined_query->row['query']);
+				if ($url[0] == 'category_id') {
+					$cid = (int)$url[1];
+					$path_query = $this->db->query("SELECT path_id FROM " . DB_PREFIX . "category_path WHERE category_id = '" . $cid . "' ORDER BY level");
+					$path_parts = array();
+					foreach ($path_query->rows as $row) {
+						$path_parts[] = $row['path_id'];
+					}
+					$this->request->get['path'] = !empty($path_parts) ? implode('_', $path_parts) : $cid;
+					$this->request->get['route'] = 'product/category';
+					unset($this->request->get['_route_']);
+					return;
+				} elseif ($url[0] == 'product_id') {
+					$this->request->get['product_id'] = $url[1];
+					$this->request->get['route'] = 'product/product';
+					unset($this->request->get['_route_']);
+					return;
+				}
+			}
+
+			// Custom decoder for product URLs with combined category paths (e.g. reduktory/cilindricheskie/reduktor-rk-500)
+			if (strpos($clean_path, '/') !== false) {
+				$last_slash_pos = strrpos($clean_path, '/');
+				$prefix = substr($clean_path, 0, $last_slash_pos);
+				$suffix = substr($clean_path, $last_slash_pos + 1);
+
+				// Check if suffix is a product
+				$suffix_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE keyword = '" . $this->db->escape($suffix) . "' AND query LIKE 'product_id=%' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
+				if ($suffix_query->num_rows) {
+					$product_parts = explode('=', $suffix_query->row['query']);
+					$this->request->get['product_id'] = (int)$product_parts[1];
+
+					// Check if prefix is a combined category keyword
+					$prefix_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE keyword = '" . $this->db->escape($prefix) . "' AND query LIKE 'category_id=%' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
+					if ($prefix_query->num_rows) {
+						$category_parts = explode('=', $prefix_query->row['query']);
+						$cid = (int)$category_parts[1];
+
+						$path_query = $this->db->query("SELECT path_id FROM " . DB_PREFIX . "category_path WHERE category_id = '" . $cid . "' ORDER BY level");
+						$path_parts = array();
+						foreach ($path_query->rows as $row) {
+							$path_parts[] = $row['path_id'];
+						}
+						$this->request->get['path'] = !empty($path_parts) ? implode('_', $path_parts) : $cid;
+					}
+
+					$this->request->get['route'] = 'product/product';
+					unset($this->request->get['_route_']);
+					return;
+				}
+			}
+
 			$parts = explode('/', $this->request->get['_route_']);
 
 			// remove any empty arrays from trailing
@@ -76,7 +135,12 @@ class ControllerStartupSeoUrl extends Controller {
 				foreach ($categorys_id as $category_id) {
 					$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "seo_url` WHERE `query` = 'category_id=" . (int)$category_id . "' AND `store_id` = '" . (int)$this->config->get('config_store_id') . "' AND `language_id` = '" . (int)$this->config->get('config_language_id') . "'");   
 					if ($query->num_rows && $query->row['keyword'] /**/ ) {
-						$cat_path .= '/' . $query->row['keyword'];
+						$keyword = $query->row['keyword'];
+						if (strpos($keyword, '/') !== false) {
+							$cat_path = '/' . $keyword;
+						} else {
+							$cat_path .= '/' . $keyword;
+						}
 					} else {
 						$cat_path = false;
 						break;
@@ -132,7 +196,12 @@ class ControllerStartupSeoUrl extends Controller {
 						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = 'category_id=" . (int)$category . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 						if ($query->num_rows && $query->row['keyword']) {
-							$url .= '/' . $query->row['keyword'];
+							$kw = $query->row['keyword'];
+							if (strpos($kw, '/') !== false) {
+								$url = '/' . $kw;
+							} else {
+								$url .= '/' . $kw;
+							}
 						} else {
 							$url = '';
 

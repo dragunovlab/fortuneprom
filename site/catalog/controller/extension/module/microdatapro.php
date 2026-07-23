@@ -126,7 +126,7 @@ class ControllerExtensionModuleMicrodataPro extends Controller {
 				}
 			}
 
-			$data['range'] = $this->config->get('module_microdatapro_category_range');
+			$data['range'] = false;
 			$data['sku'] = '';
 			if($data['range']){
 				$min_max = array();

@@ -9,17 +9,42 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 		$data['products'] = array();
 
-		if (!$setting['limit']) {
-			$setting['limit'] = 4;
+		$limit = !empty($setting['limit']) ? (int)$setting['limit'] : 4;
+		$route = isset($this->request->get['route']) ? $this->request->get['route'] : 'common/home';
+
+		if ($route === 'common/home') {
+			$limit = max(5, $limit);
 		}
 
 		if (!empty($setting['product'])) {
-			$products = array_slice($setting['product'], 0, (int)$setting['limit']);
+			$product_infos = array();
 
-			foreach ($products as $product_id) {
+			foreach (array_slice($setting['product'], 0, $limit) as $product_id) {
 				$product_info = $this->model_catalog_product->getProduct($product_id);
 
 				if ($product_info) {
+					$product_infos[$product_info['product_id']] = $product_info;
+				}
+			}
+
+			if (count($product_infos) < $limit) {
+				$fallback_products = $this->model_catalog_product->getProducts(array(
+					'sort'  => 'p.date_added',
+					'order' => 'DESC',
+					'start' => 0,
+					'limit' => $limit * 3
+				));
+
+				foreach ($fallback_products as $product_info) {
+					$product_infos[$product_info['product_id']] = $product_info;
+
+					if (count($product_infos) >= $limit) {
+						break;
+					}
+				}
+			}
+
+			foreach ($product_infos as $product_info) {
 					if ($product_info['image']) {
 						$image = $this->model_tool_image->resize($product_info['image'], $setting['width'], $setting['height']);
 					} else {
@@ -27,19 +52,19 @@ class ControllerExtensionModuleFeatured extends Controller {
 					}
 
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 
 					if ((float)$product_info['special']) {
-						$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -61,7 +86,6 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
 					);
-				}
 			}
 		}
 

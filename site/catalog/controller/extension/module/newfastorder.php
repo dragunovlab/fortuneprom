@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 class ControllerExtensionModuleNewfastorder extends Controller { 
 	private $error = array();
 	public function index() {
@@ -110,19 +110,19 @@ class ControllerExtensionModuleNewfastorder extends Controller {
 				$data['thumb_small'] = $this->model_tool_image->resize('no_image.jpg', 60, 60);
 			}		
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-				$data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				$data['price'] = 'Цена по запросу';
 			} else {
 				$data['price'] = false;
 			}
 						
 			if ((float)$product_info['special']) {
-				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				$data['special'] = false;
 			} else {
 				$data['special'] = false;
 			}
 			
 			if ($this->config->get('config_tax')) {
-				$data['tax'] = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
+				$data['tax'] = false;
 			} else {
 				$data['tax'] = false;
 			}
@@ -134,7 +134,7 @@ class ControllerExtensionModuleNewfastorder extends Controller {
 			foreach ($discounts as $discount) {
 				$data['discounts'][] = array(
 					'quantity' => $discount['quantity'],
-					'price'    => $this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'])
+					'price'    => 'Цена по запросу'
 				);
 			}
 		  $data['price_value'] = $product_info['price'];
@@ -165,7 +165,7 @@ class ControllerExtensionModuleNewfastorder extends Controller {
 				foreach ($option['product_option_value'] as $option_value) {
 					if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 						if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-							$price = $this->currency->format($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $this->session->data['currency']);
+							$price = 'Цена по запросу';
 						} else {
 							$price = false;
 						}
@@ -776,3 +776,4 @@ class ControllerExtensionModuleNewfastorder extends Controller {
 }	
 }
 ?>
+

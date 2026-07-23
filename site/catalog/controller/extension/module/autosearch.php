@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 class ControllerExtensionModuleAutosearch extends Controller { 
 	private $error = array();
 	public function ajaxLiveSearch() {
@@ -63,18 +63,18 @@ class ControllerExtensionModuleAutosearch extends Controller {
 					$manufacturer=str_ireplace($this->request->get['filter_name'],'<span class="highlight">'. htmlspecialchars(substr($result['manufacturer'],stripos($result['manufacturer'],$this->request->get['filter_name']),strlen($this->request->get['filter_name']))) .'</span>',$result['manufacturer']);
 				
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -107,3 +107,4 @@ class ControllerExtensionModuleAutosearch extends Controller {
 	}
 }
 ?>
+

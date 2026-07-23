@@ -61,17 +61,8 @@ class ControllerProductCompare extends Controller {
 					$image = false;
 				}
 
-				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-					$price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-				} else {
-					$price = false;
-				}
-
-				if ((float)$product_info['special']) {
-					$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-				} else {
-					$special = false;
-				}
+				$price = 'Цена по запросу';
+				$special = false;
 
 				if ($product_info['quantity'] <= 0) {
 					$availability = $product_info['stock_status'];

@@ -150,6 +150,9 @@ class ControllerProductLiveOptions extends Controller {
 						$json['new_price']['tax'] = false;
 					}
 				}
+				$json['new_price']['price'] = 'Цена по запросу';
+				$json['new_price']['special'] = false;
+				$json['new_price']['tax'] = false;
 				$json['new_price']['reward'] = ($product_info['reward'] > 0) ? (abs($product_info['reward']) * $quantity) : 0;
 				$json['new_price']['points'] = ($product_info['points'] + $options_points > 0) ? abs($product_info['points'] + $options_points) * $quantity : 0;
 

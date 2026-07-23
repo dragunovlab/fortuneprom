@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class ControllerExtensionModuleAlltabs extends Controller {
 	public function index($setting) {
 		$data['nst_data'] = $this->config->get('nst_data');
@@ -148,19 +148,19 @@ class ControllerExtensionModuleAlltabs extends Controller {
 					}
 
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 
 					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -231,7 +231,7 @@ class ControllerExtensionModuleAlltabs extends Controller {
 						foreach ($option['product_option_value'] as $option_value) {
 							if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 								if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-									$option_price = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $currency);
+									$option_price = false;
 								} else {
 									$option_price = false;
 								}
@@ -277,13 +277,13 @@ class ControllerExtensionModuleAlltabs extends Controller {
 				}	
 					
 					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-						$price_no_format = $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$price_no_format = 0;
 					} else {
 						$price_no_format = false;
 					}
 
 					if ((float)$result['special']) {
-						$special_no_format = $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$special_no_format = false;
 					} else {
 						$special_no_format = false;
 					}
@@ -337,19 +337,19 @@ class ControllerExtensionModuleAlltabs extends Controller {
 					}
 
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 
 					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -418,7 +418,7 @@ class ControllerExtensionModuleAlltabs extends Controller {
 						foreach ($option['product_option_value'] as $option_value) {
 							if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 								if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-									$option_price = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $currency);
+									$option_price = false;
 								} else {
 									$option_price = false;
 								}
@@ -463,13 +463,13 @@ class ControllerExtensionModuleAlltabs extends Controller {
 					}
 				}	
 					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-						$price_no_format = $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$price_no_format = 0;
 					} else {
 						$price_no_format = false;
 					}
 
 					if ((float)$result['special']) {
-						$special_no_format = $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$special_no_format = false;
 					} else {
 						$special_no_format = false;
 					}
@@ -515,19 +515,19 @@ class ControllerExtensionModuleAlltabs extends Controller {
 					}
 
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 						
 					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -599,7 +599,7 @@ class ControllerExtensionModuleAlltabs extends Controller {
 						foreach ($option['product_option_value'] as $option_value) {
 							if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 								if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-									$option_price = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $currency);
+									$option_price = false;
 								} else {
 									$option_price = false;
 								}
@@ -645,13 +645,13 @@ class ControllerExtensionModuleAlltabs extends Controller {
 				}
 					
 					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-						$price_no_format = $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$price_no_format = 0;
 					} else {
 						$price_no_format = false;
 					}
 
 					if ((float)$result['special']) {
-						$special_no_format = $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$special_no_format = false;
 					} else {
 						$special_no_format = false;
 					}
@@ -705,19 +705,19 @@ class ControllerExtensionModuleAlltabs extends Controller {
 					}
 
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 
 					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -790,7 +790,7 @@ class ControllerExtensionModuleAlltabs extends Controller {
 						foreach ($option['product_option_value'] as $option_value) {
 							if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 								if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-									$option_price = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $currency);
+									$option_price = false;
 								} else {
 									$option_price = false;
 								}
@@ -836,13 +836,13 @@ class ControllerExtensionModuleAlltabs extends Controller {
 				}
 					
 					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-						$price_no_format = $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$price_no_format = 0;
 					} else {
 						$price_no_format = false;
 					}
 
 					if ((float)$result['special']) {
-						$special_no_format = $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$special_no_format = false;
 					} else {
 						$special_no_format = false;
 					}
@@ -897,19 +897,19 @@ class ControllerExtensionModuleAlltabs extends Controller {
 					}
 
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 
 					if ((float)$product_info['special']) {
-						$special = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -979,7 +979,7 @@ class ControllerExtensionModuleAlltabs extends Controller {
 						foreach ($option['product_option_value'] as $option_value) {
 							if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 								if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-									$option_price = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $currency);
+									$option_price = false;
 								} else {
 									$option_price = false;
 								}
@@ -1025,13 +1025,13 @@ class ControllerExtensionModuleAlltabs extends Controller {
 				}
 					
 					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-						$price_no_format = $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax'));
+						$price_no_format = 0;
 					} else {
 						$price_no_format = false;
 					}
 
 					if ((float)$product_info['special']) {
-						$special_no_format = $this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'));
+						$special_no_format = false;
 					} else {
 						$special_no_format = false;
 					}

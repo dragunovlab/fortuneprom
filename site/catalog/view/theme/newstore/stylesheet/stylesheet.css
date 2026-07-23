@@ -1278,7 +1278,7 @@ a.zoom-magnify { width: 100%; }
 }
 .product-slider .owl-item .item {
 	margin:5px 12px;
-	border:1px solid #cccccc;
+	border:none;
 	border-radius:5px;
 }
 .product-slider  .owl-item .item:hover {
@@ -1385,7 +1385,7 @@ a.zoom-magnify { width: 100%; }
 }
 .container-module .item,
 .container-module-productany .item{
-	background:#ffffff;
+	background:transparent;
 }
 .container-module .owl-carousel ,
 .categorywall-container .owl-carousel,

@@ -29,11 +29,48 @@ class ControllerCommonHeader extends Controller {
 		$data['base'] = $server;
 		$data['description'] = $this->document->getDescription();
 		$data['keywords'] = $this->document->getKeywords();
+		$robots = method_exists($this->document, 'getRobots') ? $this->document->getRobots() : '';
+
+		if (!$robots) {
+			foreach (array('fp_type', 'fp_series', 'fp_power', 'fp_ratio', 'fp_mount') as $filter_key) {
+				if (isset($this->request->get[$filter_key]) || isset($_GET[$filter_key])) {
+					$robots = 'noindex,follow';
+					break;
+				}
+			}
+		}
+
+		$data['robots'] = $robots;
 		$data['links'] = $this->document->getLinks();
 		$data['styles'] = $this->document->getStyles();
 		$data['scripts'] = $this->document->getScripts('header');
 		$data['lang'] = $this->language->get('code');
 		$data['direction'] = $this->language->get('direction');
+
+		// Canonical: извлекаем из document->getLinks()
+		$data['canonical_url'] = '';
+		foreach ($this->document->getLinks() as $link) {
+			if (isset($link['rel']) && $link['rel'] === 'canonical') {
+				$data['canonical_url'] = $link['href'];
+				break;
+			}
+		}
+
+		$current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] ? 'https://' : 'http://') . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '');
+
+		// Если canonical не задан контроллером — ставим текущий URL
+		if (!$data['canonical_url']) {
+			$data['canonical_url'] = $current_url;
+		}
+
+		// Open Graph / Twitter
+		$route_og = isset($this->request->get['route']) ? $this->request->get['route'] : (isset($_GET['route']) ? $_GET['route'] : 'common/home');
+		$data['og_title'] = $this->document->getTitle();
+		$data['og_description'] = $this->document->getDescription();
+		$data['og_url'] = $data['canonical_url'];
+		$data['og_image'] = $server . 'image/' . ($this->config->get('config_logo') ?: 'catalog/logo.png');
+		$data['og_site_name'] = $this->config->get('config_name');
+		$data['og_type'] = ($route_og === 'product/product') ? 'product' : 'website';
 
 		$data['name'] = $this->config->get('config_name');
 

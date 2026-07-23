@@ -49,7 +49,7 @@ if (localStorage.getItem('display') === null) {localStorage.setItem('display', '
 .product-slider {margin:0px -5px;}
 }
 @media (min-width: 1360px){
-.container { width: calc(100% - 20px);}
+.container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; }
 header .col-md-3.logo-top {width:20%;}
 header .col-md-3.menu-box {width:20%;}
 header .dop-right-menu {width:80%;}
@@ -94,7 +94,7 @@ header .box-cart.col-md-1.col-md-push-5{width:7%;left:48%}
 <script src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js"></script>
 <script src="catalog/view/theme/newstore/js/jquery.menu-aim.js"></script>
 <script src="catalog/view/javascript/common.js"></script>
-<script src="catalog/view/theme/newstore/js/common.js"></script>
+<script src="catalog/view/theme/newstore/js/common.js?v=20260722v44"></script>
 {% for script in scripts %}
 <script src="{{ script }}"></script>
 {% endfor %}
@@ -154,7 +154,18 @@ function creatOverlayLoadPage(action) {
 {% if (hbannermob[lang_id]['image'] is defined and (hbannermob[lang_id]['image'] != '')) %}<style>.htop-b-mob img {margin:0 auto;}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}.htop-b-mob{padding-top:50px;}{% endif %}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}header.pad-top{padding-top:5px;}{% endif %}</style>{% endif %}
-<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260709a" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260723v34" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/newstore/stylesheet/fp-layout-v2.css?v=20260722b" rel="stylesheet" media="screen" />
+<script>
+document.addEventListener("click", function(e) {
+  var btn = e.target.closest(".product-thumb .btn-wishlist");
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    var thumb = btn.closest(".product-thumb");
+    var titleEl = thumb.querySelector(".product-name a");
+    var title = titleEl ? titleEl.textContent.trim() : "";
+<link href="catalog/view/theme/newstore/stylesheet/fp-layout-v2.css?v=20260722b" rel="stylesheet" media="screen" />
 <script>
 document.addEventListener("click", function(e) {
   var btn = e.target.closest(".product-thumb .btn-wishlist");
@@ -169,22 +180,227 @@ document.addEventListener("click", function(e) {
   }
 });
 </script>
-<script>
-document.addEventListener("click", function(e) {
-  var btn = e.target.closest(".product-thumb .btn-wishlist");
-  if (btn) {
-    e.preventDefault();
-    e.stopPropagation();
-    var thumb = btn.closest(".product-thumb");
-    var titleEl = thumb.querySelector(".product-name a");
-    var title = titleEl ? titleEl.textContent.trim() : "";
-    var url = "https://wa.me/77775887716?text=" + encodeURIComponent("Здравствуйте! Интересует цена на товар: " + title);
-    window.open(url, "_blank");
-  }
-});
-</script>
+<style>
+.widget-connect-left, .widget-connect-right { width: auto !important; max-width: none !important; }
+</style>
+<style id="fp-cart-drawer-css">
+/* --- FP OFF-CANVAS CART DRAWER CRITICAL STYLES --- */
+body.fp-cart-open { overflow: hidden !important; }
+body.fp-cart-open .fp-social-sidebar,
+body.fp-cart-open .widget-connect,
+body.fp-cart-open jdiv,
+body.fp-cart-drawer-ready #cart > ul.dropdown-menu { display: none !important; }
+
+.fp-cart-backdrop {
+  position: fixed !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; inset: 0 !important; z-index: 10600 !important; display: block !important;
+  width: 100% !important; height: 100% !important; padding: 0 !important; border: 0 !important;
+  background: rgba(15, 23, 42, .52) !important; opacity: 0 !important; visibility: hidden !important;
+  cursor: default !important; backdrop-filter: blur(2px) !important;
+  transition: opacity .25s ease, visibility .25s ease !important;
+}
+body.fp-cart-open .fp-cart-backdrop { opacity: 1 !important; visibility: visible !important; }
+
+#fp-cart-drawer,
+aside#fp-cart-drawer,
+aside.fp-cart-drawer,
+.fp-cart-drawer {
+  position: fixed !important; top: 0 !important; right: 0 !important; bottom: 0 !important; z-index: 10700 !important;
+  display: flex !important; width: min(440px, 100%) !important; flex-direction: column !important;
+  background: #ffffff !important; box-shadow: -18px 0 50px rgba(15, 23, 42, .18) !important;
+  visibility: hidden !important; transform: translate3d(102%, 0, 0) !important; will-change: transform !important;
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1), visibility .32s ease !important;
+}
+body.fp-cart-open #fp-cart-drawer,
+body.fp-cart-open aside#fp-cart-drawer,
+body.fp-cart-open .fp-cart-drawer { visibility: visible !important; transform: translate3d(0, 0, 0) !important; }
+
+.fp-cart-drawer-head, #fp-cart-drawer .fp-cart-drawer-head {
+  display: flex !important; min-height: 76px !important; flex: 0 0 auto !important; align-items: center !important;
+  justify-content: space-between !important; padding: 14px 20px 14px 24px !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important; color: #ffffff !important;
+}
+.fp-cart-drawer-head > div, #fp-cart-drawer .fp-cart-drawer-head > div { display: flex !important; min-width: 0 !important; flex-direction: column !important; gap: 3px !important; }
+.fp-cart-drawer-head strong, #fp-cart-drawer .fp-cart-drawer-head strong { font-size: 20px !important; font-weight: 800 !important; line-height: 1.2 !important; color: #ffffff !important; }
+.fp-cart-drawer-summary, #fp-cart-drawer .fp-cart-drawer-summary { font-size: 13px !important; opacity: .88 !important; color: #ffffff !important; }
+.fp-cart-drawer-close, #fp-cart-drawer .fp-cart-drawer-close {
+  display: flex !important; width: 40px !important; height: 40px !important; align-items: center !important;
+  justify-content: center !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important;
+  background: rgba(255, 255, 255, .15) !important; color: #ffffff !important; cursor: pointer !important;
+  transition: background .2s ease, transform .2s ease !important;
+}
+.fp-cart-drawer-close:hover,
+.fp-cart-drawer-close:focus { background: rgba(255, 255, 255, .28) !important; transform: scale(1.05) !important; outline: 0 !important; }
+.fp-cart-drawer-body, #fp-cart-drawer .fp-cart-drawer-body {
+  display: block !important; flex: 1 1 auto !important; overflow-y: auto !important; margin: 0 !important;
+  padding: 20px 24px !important; list-style: none !important;
+}
+.fp-cart-drawer-body > li, #fp-cart-drawer .fp-cart-drawer-body > li { display: block !important; margin: 0 !important; padding: 0 !important; }
+.fp-cart-drawer-body > li + li, #fp-cart-drawer .fp-cart-drawer-body > li + li { margin-top: 16px !important; padding-top: 16px !important; border-top: 1px solid #e2e8f0 !important; }
+.fp-cart-drawer-body .table, #fp-cart-drawer .fp-cart-drawer-body .table { width: 100% !important; margin: 0 !important; color: #334155 !important; font-size: 13px !important; }
+.fp-cart-drawer-body .table > tbody > tr > td, #fp-cart-drawer .fp-cart-drawer-body .table > tbody > tr > td { padding: 10px 6px !important; vertical-align: middle !important; border-top: 1px solid #f1f5f9 !important; }
+.fp-cart-drawer-body .table > tbody > tr:first-child > td, #fp-cart-drawer .fp-cart-drawer-body .table > tbody > tr:first-child > td { border-top: 0 !important; }
+.fp-cart-drawer-body .table img,
+.fp-cart-drawer-body img.img-thumbnail {
+  max-width: 60px !important; max-height: 60px !important; object-fit: contain !important;
+  border-radius: 8px !important; border: 1px solid #e2e8f0 !important; padding: 4px !important; background: #ffffff !important;
+}
+.fp-cart-drawer-body .table td:first-child { width: 70px !important; padding-left: 0 !important; }
+.fp-cart-drawer-body .table td:nth-last-child(3) { color: #64748b !important; white-space: nowrap !important; }
+.fp-cart-drawer-body a { color: #0f172a !important; font-weight: 650 !important; line-height: 1.35 !important; text-decoration: none !important; }
+.fp-cart-drawer-body a:hover,
+.fp-cart-drawer-body a:focus { color: #2563eb !important; }
+.fp-cart-drawer-body small { display: inline-block !important; margin-top: 4px !important; color: #64748b !important; }
+.fp-cart-drawer-body .btn-danger,
+.fp-cart-drawer-body button[onclick*="cart.remove"] {
+  display: inline-flex !important; width: 32px !important; height: 32px !important; align-items: center !important;
+  justify-content: center !important; padding: 0 !important; border: 0 !important; border-radius: 8px !important;
+  background: #f1f5f9 !important; color: #64748b !important; cursor: pointer !important; transition: all .2s ease !important;
+}
+.fp-cart-drawer-body .btn-danger:hover,
+.fp-cart-drawer-body .btn-danger:focus,
+.fp-cart-drawer-body button[onclick*="cart.remove"]:hover,
+.fp-cart-drawer-body button[onclick*="cart.remove"]:focus { background: #ffe4e6 !important; color: #be123c !important; }
+.fp-cart-drawer-body .table-bordered { border: 0 !important; background: #f8fafc !important; border-radius: 12px !important; overflow: hidden !important; }
+.fp-cart-drawer-body .table-bordered td { padding: 9px 12px !important; border: 0 !important; }
+.fp-cart-drawer-body .table-bordered td:last-child { color: #0f172a !important; font-weight: 800 !important; }
+.fp-cart-drawer-body > li:last-child > p.text-right,
+.fp-cart-drawer-body > li:last-child > div > p.text-right {
+  display: flex !important; gap: 10px !important; margin: 16px 0 0 !important; padding: 0 !important;
+}
+.fp-cart-drawer-body > li:last-child > p.text-right > a,
+.fp-cart-drawer-body > li:last-child > div > p.text-right > a {
+  flex: 1 1 50% !important; display: inline-flex !important; height: 44px !important; align-items: center !important;
+  justify-content: center !important; padding: 0 12px !important; border-radius: 10px !important;
+  font-weight: 700 !important; font-size: 13.5px !important; text-align: center !important; text-decoration: none !important;
+  transition: all .2s ease !important; background: #f1f5f9 !important; color: #334155 !important;
+}
+.fp-cart-drawer-body > li:last-child > p.text-right > a:last-child,
+.fp-cart-drawer-body > li:last-child > div > p.text-right > a:last-child {
+  background: #2563eb !important; color: #ffffff !important; box-shadow: 0 4px 14px rgba(37, 99, 235, .28) !important;
+}
+.fp-cart-drawer-body > li:only-child > .text-center {
+  padding: 40px 20px !important; color: #64748b !important; font-size: 15px !important; font-weight: 600 !important;
+}
+</style>
+<style id="fp-catalog-drawer-css">
+/* --- FP OFF-CANVAS CATALOG DRAWER RIGHT SLIDE-OUT STYLES --- */
+body.fp-catalog-open { overflow: hidden !important; }
+body.fp-catalog-open .fp-social-sidebar,
+body.fp-catalog-open .widget-connect,
+body.fp-catalog-open jdiv { display: none !important; }
+
+.fp-catalog-backdrop {
+  position: fixed !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; inset: 0 !important; z-index: 10600 !important; display: block !important;
+  width: 100% !important; height: 100% !important; padding: 0 !important; border: 0 !important;
+  background: rgba(15, 23, 42, .52) !important; opacity: 0 !important; visibility: hidden !important;
+  cursor: default !important; backdrop-filter: blur(2px) !important;
+  transition: opacity .25s ease, visibility .25s ease !important;
+}
+body.fp-catalog-open .fp-catalog-backdrop { opacity: 1 !important; visibility: visible !important; }
+
+.fp-catalog-drawer-panel,
+ul.fp-catalog-drawer-panel,
+body .fp-catalog-drawer-panel,
+body.fp-site-width-compact .fp-catalog-drawer-panel,
+body.fp-site-width-medium .fp-catalog-drawer-panel,
+body.fp-site-width-full .fp-catalog-drawer-panel {
+  position: fixed !important; top: 0 !important; left: 0 !important; right: auto !important; bottom: 0 !important; z-index: 10700 !important;
+  display: flex !important; width: min(440px, 92vw) !important; flex-direction: column !important; margin: 0 !important; padding: 0 !important;
+  background: #ffffff !important; box-shadow: 18px 0 50px rgba(15, 23, 42, .18) !important; list-style: none !important;
+  border-radius: 0 18px 18px 0 !important;
+  overflow-y: auto !important; visibility: hidden !important; transform: translate3d(-102%, 0, 0) !important; will-change: transform !important;
+  transition: transform .32s cubic-bezier(.22, 1, .36, 1), visibility .32s ease !important;
+}
+body.fp-catalog-open .fp-catalog-drawer-panel,
+body.fp-catalog-open .fp-catalog-drawer-panel.fp-catalog-active {
+  left: 0 !important; right: auto !important; visibility: visible !important; transform: translate3d(0, 0, 0) !important;
+}
+
+.fp-catalog-drawer-head {
+  display: flex !important; min-height: 76px !important; flex: 0 0 auto !important; align-items: center !important;
+  justify-content: space-between !important; padding: 14px 20px 14px 24px !important;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important; color: #ffffff !important;
+}
+.fp-catalog-drawer-head strong { font-size: 20px !important; font-weight: 800 !important; line-height: 1.2 !important; color: #ffffff !important; }
+.fp-catalog-drawer-close {
+  display: flex !important; width: 40px !important; height: 40px !important; align-items: center !important;
+  justify-content: center !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important;
+  background: rgba(255, 255, 255, .15) !important; color: #ffffff !important; cursor: pointer !important;
+  transition: background .2s ease, transform .2s ease !important;
+}
+.fp-catalog-drawer-close:hover,
+.fp-catalog-drawer-close:focus { background: rgba(255, 255, 255, .28) !important; transform: scale(1.05) !important; outline: 0 !important; }
+
+.fp-catalog-drawer-panel > li { display: block !important; margin: 0 !important; padding: 0 !important; border-bottom: 1px solid #f1f5f9 !important; position: relative !important; }
+.fp-catalog-drawer-panel > li > a {
+  display: flex !important; align-items: center !important; padding: 14px 50px 14px 24px !important;
+  color: #0f172a !important; font-weight: 650 !important; font-size: 14.5px !important; text-decoration: none !important;
+  transition: background .2s ease, color .2s ease !important;
+}
+.fp-catalog-drawer-panel > li > a:hover,
+.fp-catalog-drawer-panel > li.menu-open > a { background: #f8fafc !important; color: #2563eb !important; }
+
+.fp-catalog-category-icon {
+  display: inline-flex !important; width: 32px !important; height: 32px !important; align-items: center !important;
+  justify-content: center !important; margin-right: 12px !important; border-radius: 8px !important;
+  background: #f1f5f9 !important; color: #2563eb !important; font-size: 14px !important; flex-shrink: 0 !important;
+}
+.fp-catalog-drawer-panel .toggle-child {
+  position: absolute !important; top: 10px !important; right: 16px !important; width: 36px !important; height: 36px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  border-radius: 8px !important; background: #f1f5f9 !important; color: #64748b !important; cursor: pointer !important;
+}
+.fp-catalog-drawer-panel .toggle-child:hover { background: #e2e8f0 !important; color: #0f172a !important; }
+.fp-catalog-drawer-panel .ns-dd {
+  display: none !important; padding: 8px 24px 16px 68px !important; background: #f8fafc !important; border-top: 1px solid #e2e8f0 !important;
+}
+.fp-catalog-drawer-panel > li > .toggle-child.open ~ .ns-dd { display: block !important; }
+.fp-catalog-drawer-panel .ns-dd li { list-style: none !important; margin: 6px 0 !important; }
+.fp-catalog-drawer-panel .ns-dd li > a { color: #475569 !important; font-weight: 500 !important; font-size: 13.5px !important; text-decoration: none !important; }
+.fp-catalog-drawer-panel .ns-dd li > a:hover { color: #2563eb !important; }
+</style>
 </head>
 <body class="{{ class }}">
+<script>
+(function () {
+  var nodes = document.body.childNodes;
+  for (var i = nodes.length - 1; i >= 0; i--) {
+    if (nodes[i].nodeType === 3 && nodes[i].nodeValue.indexOf('\uFEFF') !== -1) {
+      document.body.removeChild(nodes[i]);
+    }
+  }
+})();
+</script>
+<div class="fp-social-sidebar" aria-label="Социальные сети Fortune PROM">
+  <a class="fp-social-link fp-social-link--whatsapp" href="https://api.whatsapp.com/send/?phone=77789707140" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
+    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+    <span>WhatsApp</span>
+  </a>
+  <a class="fp-social-link fp-social-link--telegram" href="https://t.me/+77789707140" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram">
+    <i class="fa fa-telegram" aria-hidden="true"></i>
+    <span>Telegram</span>
+  </a>
+  <a class="fp-social-link fp-social-link--instagram" href="https://www.instagram.com/too_fortuneprom/" target="_blank" rel="noopener noreferrer" aria-label="Наш Instagram">
+    <i class="fa fa-instagram" aria-hidden="true"></i>
+    <span>Instagram</span>
+  </a>
+  <a class="fp-social-link fp-social-link--facebook" href="https://www.facebook.com/fortune.promtoo" target="_blank" rel="noopener noreferrer" aria-label="Наша страница в Facebook">
+    <i class="fa fa-facebook" aria-hidden="true"></i>
+    <span>Facebook</span>
+  </a>
+  <a class="fp-social-link fp-social-link--youtube" href="https://www.youtube.com/@fortuneprom5024" target="_blank" rel="noopener noreferrer" aria-label="Наш YouTube канал">
+    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+    <span>YouTube</span>
+  </a>
+  <div class="fp-theme-settings-wrapper">
+    <button type="button" class="fp-theme-settings-toggle" id="theme-settings-toggle" aria-label="Настройки оформления" style="cursor:pointer !important;">
+      <i class="fa fa-cog" aria-hidden="true"></i>
+    </button>
+    <div class="fp-theme-settings-dropdown" id="theme-settings-dropdown" hidden>
+      <div class="fp-theme-settings-panel"></div>
+    </div>
+  </div>
+</div>
 {% if (hbannerpc[lang_id]['image'] is defined and (hbannerpc[lang_id]['image'] != '')) %}
 <div class="htop-b-pc hidden-xs hidden-sm" {% if (nst_data['hbannerpc'][lang_id]['bg'] is defined and (nst_data['hbannerpc'][lang_id]['bg'] != '')) %}style="background:{{ nst_data['hbannerpc'][lang_id]['bg'] }}"{% endif %}>
 {% if nst_data['hbannerpc'][lang_id]['link'] is not empty %}
@@ -259,39 +475,24 @@ document.addEventListener("click", function(e) {
 		</div>
 	</div>
 </div>
-<nav id="top">
+<nav id="top" class="fp-reference-topbar">
   <div class="container">
     <div class="top-bar-flex">
       <div class="top-bar-left hidden-xs hidden-sm">
-        <span class="top-info-item"><i class="fa fa-truck"></i> Доставка по всему Казахстану</span>
-        <span class="top-info-item"><i class="fa fa-shield"></i> Официальная гарантия 12 месяцев</span>
-        <span class="top-info-item"><i class="fa fa-briefcase"></i> Работаем с ТОО и ИП</span>
-        <span class="top-info-item"><i class="fa fa-cogs"></i> Подбор оборудования под задачу</span>
-      </div>
-      <div class="top-bar-right">
-        <a href="index.php?route=information/information&information_id=4" class="top-link">О компании</a>
-        <a href="index.php?route=information/news" class="top-link">Новости</a>
-        <a href="index.php?route=information/information&information_id=6" class="top-link">Доставка и оплата</a>
-        <a href="index.php?route=information/contact" class="top-link">Контакты</a>
-        
-        <div class="box-account-inline">
-          <a href="{{ account }}" class="top-link"><i class="fa fa-user-circle-o"></i> Личный кабинет</a>
-        </div>
-        
-        <div style="display:none;">
-          {{ currency }}
-          {{ language }}
-        </div>
+        <span class="top-info-item"><i class="fa fa-truck" aria-hidden="true"></i> Доставка по всему Казахстану</span>
+        <span class="top-info-item"><i class="fa fa-cogs" aria-hidden="true"></i> Официальные поставки с заводов</span>
+        <span class="top-info-item"><i class="fa fa-shield" aria-hidden="true"></i> Гарантия до 24 месяцев</span>
+        <span class="top-info-item"><i class="fa fa-certificate" aria-hidden="true"></i> Документы и сертификаты качества</span>
       </div>
     </div>
   </div>
 </nav>
-<header {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}class="pad-top"{% endif %}>
-<div class="container">
-<div class="row vertical-align">
-      <div class="col-xs-6 col-sm-12 col-md-3 text-center text-left-md logo-top">
+<header class="fp-reference-header{% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %} pad-top{% endif %}">
+  <div class="container fp-header-shell">
+    <div class="fp-header-main">
+      <div class="logo-top">
         <div id="logo">
-        {% if (logo) %}
+          {% if (logo) %}
             {% if (home == home_page) %}
               <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" />
             {% else %}
@@ -302,24 +503,118 @@ document.addEventListener("click", function(e) {
           {% endif %}
         </div>
       </div>
-		<div class="phone-box col-xs-6 col-sm-12 col-md-3 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %}{% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-md-push-5{% else %}col-md-push-4{% endif %}{% endif %} text-xs-center text-sm-center text-md-center">
-			<div id="phone">
-				<div class="contact-header">
-					<div class="dropdown-toggle">
-						<div class="additional-tel dth">
-							<a href="tel:+77775887716"><div class="icon-image"><i class="fa fa-phone"></i></div> +7 777 588 77 16</a>
-						</div>
-						<div class="additional-tel dth">
-							<a href="https://wa.me/77787887716" target="_blank"><div class="icon-image"><i class="fa fa-whatsapp"></i></div> +7 778 788 77 16</a>
-						</div>
-					</div>
-					<div class="text_after_phone">Отдел снабжения</div>
-				</div>
-			</div>
-	  </div>
-	  <div class="box-cart {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}hidden-xs{% endif %} col-xs-12 {% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-sm-4 col-sm-push-8 col-md-1 col-md-push-5 {% else %}col-xs-12 col-sm-4 col-md-2 col-md-push-4 col-sm-push-8{% endif %}">{{ cart }}</div>
-      <div class="box-search {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}hidden-xs{% endif %} col-xs-12 {% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-sm-8 col-sm-pull-4 col-md-5 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %} col-md-pull-4{% else %}col-md-pull-1{% endif %}{% else %} col-sm-8 col-md-4 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %} col-md-pull-5 col-sm-pull-4{% else %}col-sm-pull-4 col-md-pull-2{% endif %}{% endif %} search-top">{{ search }}</div>
-	</div>
-</div>
-{{ menuns }}
+
+      <div class="fp-header-catalog">{{ menuns }}</div>
+      <style>
+        html body .fp-header-catalog,
+        html body .fp-header-catalog .menu-box,
+        html body .fp-header-catalog #menu {
+          width: 145px !important;
+          min-width: 145px !important;
+          max-width: 145px !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          float: none !important;
+        }
+        html body .fp-header-catalog #menu .btn-menu,
+        html body .fp-header-catalog .btn-menu,
+        html body #menu.btn-group .btn-menu,
+        html body #menu .btn-menu {
+          display: inline-flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 8px !important;
+          width: 145px !important;
+          min-width: 145px !important;
+          max-width: 145px !important;
+          height: 40px !important;
+          min-height: 40px !important;
+          max-height: 40px !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          text-align: center !important;
+          box-sizing: border-box !important;
+          float: none !important;
+          position: relative !important;
+        }
+        html body .fp-header-catalog #menu .btn-menu .fa-bars,
+        html body .fp-header-catalog .btn-menu .fa-bars,
+        html body #menu .btn-menu .fa-bars,
+        html body #menu .btn-menu i.fa,
+        html body #menu .btn > .fa {
+          position: static !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          float: none !important;
+          transform: none !important;
+          top: auto !important;
+          left: auto !important;
+          right: auto !important;
+          font-size: 14px !important;
+          line-height: 1 !important;
+        }
+        html body .fp-header-catalog #menu .btn-menu .text-category,
+        html body .fp-header-catalog .btn-menu .text-category,
+        html body #menu .btn-menu .text-category {
+          position: static !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          float: none !important;
+          width: auto !important;
+          min-width: 0 !important;
+          max-width: none !important;
+          font-size: 0 !important;
+          text-align: center !important;
+        }
+        html body .fp-header-catalog #menu .btn-menu .text-category::before,
+        html body .fp-header-catalog .btn-menu .text-category::before,
+        html body #menu .btn-menu .text-category::before {
+          content: "Каталог" !important;
+          display: inline-block !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          font-size: 13px !important;
+          font-weight: 800 !important;
+          color: #ffffff !important;
+          letter-spacing: 0.02em !important;
+          text-transform: uppercase !important;
+          line-height: 1 !important;
+        }
+      </style>
+
+      <nav class="fp-header-primary-nav" aria-label="Основная навигация">
+        <a href="index.php?route=information/information&information_id=4">О компании</a>
+        <a href="index.php?route=information/information&information_id=6">Доставка и оплата</a>
+        <a href="index.php?route=information/contact">Контакты</a>
+      </nav>
+
+      <div class="fp-header-actions">
+        <div class="phone-box">
+          <div id="phone">
+            <div class="contact-header">
+              <div class="additional-tel dth">
+                <a href="tel:+77789707140"><i class="fa fa-phone" aria-hidden="true"></i><span>+7 778 970 71 40</span></a>
+              </div>
+              <div class="text_after_phone">Заказать звонок</div>
+            </div>
+          </div>
+        </div>
+
+        <details class="fp-header-search">
+          <summary class="fp-header-icon" aria-label="Открыть поиск"><i class="fa fa-search" aria-hidden="true"></i></summary>
+          <div class="fp-header-search-panel search-top">{{ search }}</div>
+        </details>
+        <a class="fp-header-icon fp-header-wishlist" href="{{ wishlist }}" aria-label="Избранное"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+        <div class="box-cart">{{ cart }}</div>
+        <a class="fp-header-quote" href="https://wa.me/77789707140" target="_blank" rel="noopener">Запросить цену</a>
+      </div>
+    </div>
+  </div>
 </header>

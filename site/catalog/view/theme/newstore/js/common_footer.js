@@ -457,6 +457,35 @@ function nsmenu_menu(){
 	});
 });
 
+/* Native lazy-loading enhancement for images without loading attr */
+(function() {
+	if ('loading' in HTMLImageElement.prototype) {
+		// Browser supports native lazy loading
+		document.querySelectorAll('img:not([loading])').forEach(function(img) {
+			if (!img.closest('header, .slideshow, .hero, .banner, [data-priority]')) {
+				img.loading = 'lazy';
+			}
+		});
+	} else {
+		// Fallback: IntersectionObserver
+		var observer = new IntersectionObserver(function(entries) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					var img = entry.target;
+					if (img.dataset.src) {
+						img.src = img.dataset.src;
+						img.removeAttribute('data-src');
+					}
+					observer.unobserve(img);
+				}
+			});
+		}, {rootMargin: '100px', threshold: 0.01});
+		document.querySelectorAll('img[data-src]').forEach(function(img) {
+			observer.observe(img);
+		});
+	}
+})();
+
 function heightblockauto() {
 		max_height_div('.product-thumb .option.featured-opt');
 		max_height_div('.product-thumb .option.latest-opt');
@@ -1194,3 +1223,29 @@ function get_cart_quantity(product_id,mod) {
 	quantity  = parseInt(input_val);
 	return quantity;
 }
+
+/* === Native lazy-load + fade-in === */
+(function () {
+  if ('loading' in HTMLImageElement.prototype) {
+    // Нативная поддержка есть — ставим loading="lazy" и вешаем .loaded
+    document.querySelectorAll('img:not([loading])').forEach(function (img) {
+      if (img.closest('header, .slideshow, .hero, .banner') || img.dataset.priority) return;
+      img.loading = 'lazy';
+      if (img.complete) img.classList.add('loaded');
+      else img.addEventListener('load', function () { img.classList.add('loaded'); }, { once: true });
+    });
+  } else {
+    // Фолбэк для старых браузеров — IntersectionObserver
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          img.src = img.dataset.src || img.src;
+          img.classList.add('loaded');
+          obs.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+    document.querySelectorAll('img[data-src]').forEach(function (img) { obs.observe(img); });
+  }
+})();

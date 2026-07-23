@@ -42,6 +42,9 @@ $_['entry_bad']                = 'Плохо';
 // Tabs
 $_['tab_description']          = 'Описание';
 $_['tab_attribute']            = 'Характеристики';
+$_['tab_delivery']             = 'Доставка';
+$_['tab_payment']              = 'Оплата';
+$_['tab_faq']                  = 'FAQ';
 $_['tab_review']               = 'Отзывов (%s)';
 
 // Error

@@ -1078,3 +1078,211 @@ function get_cart_quantity(product_id,mod) {
 	quantity  = parseInt(input_val);
 	return quantity;
 }
+
+/* Catalog off-canvas drawer */
+$(function () {
+	var $menus = $('nav#menu');
+	if (!$menus.length) return;
+
+	$('<button type="button" class="fp-catalog-backdrop" aria-label="Закрыть каталог"></button>').appendTo('body');
+
+	function closeCatalog() {
+		$('body').removeClass('fp-catalog-open');
+		$menus.find('.btn-menu').attr('aria-expanded', 'false');
+		$('.fp-catalog-drawer-panel').removeClass('fp-catalog-active').attr('aria-hidden', 'true');
+	}
+
+	var categoryIcons = [
+			[/drobil|melnica|vibro|bronya/, 'fa-cogs'],
+			[/elektrodvigateli|reduktory|val-shesternya|venec-zubchatyy/, 'fa-cog'],
+			[/nasosy|smazochno|vodnye-dispersii/, 'fa-tint'],
+			[/skladskoe|stalnye-shkafy/, 'fa-archive'],
+			[/elektroinstrumenty|pnevmoinstrument/, 'fa-wrench'],
+			[/generatory/, 'fa-bolt'],
+			[/elektrooborudovanie|chastotnye-preobrazovateli|transformatory/, 'fa-plug'],
+			[/kompressory/, 'fa-tachometer'],
+			[/peskostruynyy/, 'fa-bullseye'],
+			[/pyleulavlivateli|press-filtr/, 'fa-filter'],
+			[/stanki|betonosmesiteli|betonnyy-zavod|betonootdelochnye|asfalto-betonnyy/, 'fa-industry'],
+			[/zaryadnye-ustroystva-i-svarka/, 'fa-plug'],
+			[/rezervuary/, 'fa-database'],
+			[/teplovoe|nagrevatel|kotly/, 'fa-fire'],
+			[/specodezhda/, 'fa-shield'],
+			[/zip/, 'fa-puzzle-piece'],
+			[/laboratornye/, 'fa-flask'],
+			[/vvmr-vagonnyy/, 'fa-train'],
+			[/tali-i-telfer|gruzopodemnoe/, 'fa-arrows-v']
+	];
+
+	function decorateCatalogIcons($list) {
+		$list.children('li').children('a').each(function () {
+			var $link = $(this);
+			if ($link.children('.fp-catalog-category-icon').length) return;
+
+			var key = ($link.attr('href') || '').toLowerCase();
+			var icon = 'fa-cube';
+
+			if (key.indexOf('javascript:') === 0 && /^\u0433\u0435\u043d\u0435\u0440\u0430\u0442\u043e\u0440/i.test($link.text().trim())) {
+				icon = 'fa-bolt';
+			} else {
+				$.each(categoryIcons, function (_, rule) {
+					if (rule[0].test(key)) {
+						icon = rule[1];
+						return false;
+					}
+				});
+			}
+
+			$('<span class="fp-catalog-category-icon" aria-hidden="true"><i class="fa ' + icon + '"></i></span>').prependTo($link);
+		});
+	}
+	decorateCatalogIcons($('.fp-catalog-drawer-panel'));
+
+	$menus.each(function () {
+		var $menu = $(this);
+		var $list = $menu.find('#menu-list').first();
+		var $button = $menu.find('.btn-menu').first();
+		if (!$list.length || !$button.length) return;
+
+		$menu.addClass('fp-catalog-drawer');
+		$list.addClass('fp-catalog-drawer-panel').attr({'aria-hidden': 'true', 'aria-label': 'Каталог товаров'});
+		$button.attr({'aria-expanded': 'false', 'aria-controls': 'menu-list'});
+		$('<div class="fp-catalog-drawer-head"><strong>Каталог оборудования</strong><button type="button" class="fp-catalog-drawer-close" aria-label="Закрыть каталог"><i class="fa fa-times" aria-hidden="true"></i></button></div>').prependTo($list);
+		$list.appendTo('body');
+		decorateCatalogIcons($list);
+
+		var $toggles = $list.children('li').children('.toggle-child');
+		$toggles.off('click').attr({'role': 'button', 'tabindex': '0', 'aria-expanded': 'false'}).removeClass('open');
+		$list.on('click.fpCatalogAccordion', '> li > .toggle-child', function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			var $toggle = $(this);
+			var open = !$toggle.hasClass('open');
+			$toggles.removeClass('open').attr('aria-expanded', 'false');
+			if (open) $toggle.addClass('open').attr('aria-expanded', 'true');
+		});
+		$list.on('keydown.fpCatalogAccordion', '> li > .toggle-child', function (event) {
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				$(this).trigger('click');
+			}
+		});
+
+		$button.on('click.fpCatalog', function (event) {
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			var $list = $('.fp-catalog-drawer-panel').first();
+			if (!$list.length) return;
+			decorateCatalogIcons($list);
+			var open = !$list.hasClass('fp-catalog-active');
+			closeCatalog();
+			if (open) {
+				$(document).trigger('fp:closeCart');
+				$list.addClass('fp-catalog-active');
+				$('body').addClass('fp-catalog-open');
+				$button.attr('aria-expanded', 'true');
+				$list.attr('aria-hidden', 'false');
+			}
+		});
+	});
+
+	document.addEventListener('click', function (event) {
+		var btn = event.target.closest && event.target.closest('.btn-menu, #top-fixed .btn-menu, .btn-navbar');
+		if (!btn) return;
+		event.preventDefault();
+		event.stopPropagation();
+		var $list = $('.fp-catalog-drawer-panel').first();
+		if (!$list.length) return;
+		decorateCatalogIcons($list);
+		var open = !$list.hasClass('fp-catalog-active');
+		closeCatalog();
+		if (open) {
+			$(document).trigger('fp:closeCart');
+			$list.addClass('fp-catalog-active');
+			$('body').addClass('fp-catalog-open');
+			$list.attr('aria-hidden', 'false');
+		}
+	}, true);
+
+	$(document).on('click.fpCatalog', '.fp-catalog-drawer-close, .fp-catalog-backdrop', closeCatalog);
+	$(document).on('keydown.fpCatalog', function (event) {
+		if (event.key === 'Escape') closeCatalog();
+	});
+});
+
+/* Shopping cart off-canvas drawer */
+$(function () {
+	var $body = $('body');
+	var $drawer = $('<aside id="fp-cart-drawer" class="fp-cart-drawer" role="dialog" aria-modal="true" aria-labelledby="fp-cart-drawer-title" aria-hidden="true"><div class="fp-cart-drawer-head"><div><strong id="fp-cart-drawer-title">Корзина</strong><span class="fp-cart-drawer-summary"></span></div><button type="button" class="fp-cart-drawer-close" aria-label="Закрыть корзину"><i class="fa fa-times" aria-hidden="true"></i></button></div><ul class="fp-cart-drawer-body"></ul></aside>').appendTo('body');
+	var $backdrop = $('<button type="button" class="fp-cart-backdrop" aria-label="Закрыть корзину"></button>').appendTo('body');
+	var $drawerBody = $drawer.find('.fp-cart-drawer-body');
+	var $opener = $();
+	var observer;
+
+	function renderCart($cart) {
+		var $source = $cart.children('ul').first();
+		if (!$source.length) return;
+
+		$drawerBody.html($source.html());
+		$drawer.find('.fp-cart-drawer-summary').text($cart.find('.cart-total').first().text());
+
+		if (observer) observer.disconnect();
+		observer = new MutationObserver(function () {
+			if ($body.hasClass('fp-cart-open')) renderCart($cart);
+		});
+		observer.observe($source[0], {childList: true, subtree: true});
+	}
+
+	function closeCart() {
+		if (!$body.hasClass('fp-cart-open')) return;
+		$body.removeClass('fp-cart-open');
+		$drawer.attr('aria-hidden', 'true');
+		$('#cart > button').attr('aria-expanded', 'false');
+		if ($opener.length) $opener.trigger('focus');
+	}
+
+	function openCart(button) {
+		var $button = $(button);
+		var $cart = $button.closest('#cart');
+		$('.fp-catalog-drawer-close').first().trigger('click');
+		$opener = $button;
+		renderCart($cart);
+		$body.addClass('fp-cart-open');
+		$drawer.attr('aria-hidden', 'false');
+		$('#cart > button').attr('aria-expanded', 'false');
+		$button.attr('aria-expanded', 'true');
+		$drawer.find('.fp-cart-drawer-close').trigger('focus');
+	}
+
+	$body.addClass('fp-cart-drawer-ready');
+	$('#cart > button').attr({'aria-expanded': 'false', 'aria-controls': 'fp-cart-drawer', 'aria-haspopup': 'dialog'});
+
+	document.addEventListener('click', function (event) {
+		var button = event.target.closest && event.target.closest('#cart > button');
+		if (!button) return;
+		event.preventDefault();
+		event.stopPropagation();
+		openCart(button);
+	}, true);
+
+	$drawer.on('click', '.fp-cart-drawer-close', closeCart);
+	$backdrop.on('click', closeCart);
+	$(document).on('fp:closeCart', closeCart);
+	document.addEventListener('keydown', function (event) {
+		if (!$body.hasClass('fp-cart-open')) return;
+		if (event.key === 'Escape' || event.keyCode === 27) return closeCart();
+		if (event.key !== 'Tab' && event.keyCode !== 9) return;
+
+		var $focusable = $drawer.find('a:visible, button:visible, input:visible, [tabindex]:visible').filter('[tabindex!="-1"]');
+		if (!$focusable.length) return;
+		var first = $focusable[0];
+		var last = $focusable[$focusable.length - 1];
+		if (event.shiftKey && document.activeElement === first) {
+			event.preventDefault();
+			last.focus();
+		} else if (!event.shiftKey && document.activeElement === last) {
+			event.preventDefault();
+			first.focus();
+		}
+	}, true);
+});

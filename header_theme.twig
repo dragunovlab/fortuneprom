@@ -13,6 +13,24 @@
 {% if (description) %}<meta name="description" content="{{ description }}" />{% endif %}
 
 {% if (keywords) %}<meta name="keywords" content= "{{ keywords }}" />{% endif %}
+
+<!-- Open Graph -->
+{% if og_title is defined and og_title %}<meta property="og:title" content="{{ og_title }}" />{% endif %}
+{% if og_description is defined and og_description %}<meta property="og:description" content="{{ og_description }}" />{% endif %}
+{% if og_url is defined and og_url %}<meta property="og:url" content="{{ og_url }}" />{% endif %}
+{% if og_image is defined and og_image %}<meta property="og:image" content="{{ og_image }}" />{% endif %}
+{% if og_site_name is defined and og_site_name %}<meta property="og:site_name" content="{{ og_site_name }}" />{% endif %}
+{% if og_type is defined and og_type %}<meta property="og:type" content="{{ og_type }}" />{% endif %}
+{% if og_title is defined and og_title %}<meta property="og:locale" content="ru_KZ" />{% endif %}
+<!-- Twitter Card -->
+{% if og_title is defined and og_title and og_image is defined and og_image %}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ og_title }}" />
+{% if og_description is defined and og_description %}<meta name="twitter:description" content="{{ og_description }}" />{% endif %}
+<meta name="twitter:image" content="{{ og_image }}" />
+{% endif %}
+{% if (canonical_url) %}<link rel="canonical" href="{{ canonical_url }}" />{% endif %}
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 {% for link in links %}<link href="{{ link['href'] }}" rel="{{ link['rel'] }}" />{% endfor %}
 <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="preload" as="style" />
@@ -89,32 +107,17 @@ header .box-cart.col-md-1.col-md-push-5{width:7%;left:48%}
 .sticker-ns.newproduct{background: {{ config_change_background_sticker_newproduct }} none repeat scroll 0 0;color:{{ config_change_color_text_sticker_newproduct }};}
 </style>
 {{ jsnewstore }}
-{% if (minifyjs) %}
-{% for script in scripts %}<script src="{{ script }}"></script>{% endfor %}
-{% endif %}
+<link href="catalog/view/javascript/jquery/owl-carousel/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="catalog/view/javascript/jquery/owl-carousel/owl.transitions.css" rel="stylesheet" media="screen" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<script src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js"></script>
 <script src="catalog/view/theme/newstore/js/jquery.menu-aim.js"></script>
-<script>
-(function() {
-	var scripts = [
-		'catalog/view/javascript/jquery/jquery-2.1.1.min.js',
-		'catalog/view/javascript/bootstrap/js/bootstrap.min.js',
-		'catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js',
-		'catalog/view/theme/newstore/js/jquery.menu-aim.js',
-		'catalog/view/javascript/common.js',
-		'catalog/view/theme/newstore/js/common.js'
-	];
-
-	function hasScript(src) {
-		return !!document.querySelector('script[src*="' + src + '"]');
-	}
-
-	for (var i = 0; i < scripts.length; i++) {
-		if (!hasScript(scripts[i])) {
-			document.write('<script src="' + scripts[i] + '"><\\/script>');
-		}
-	}
-})();
-</script>
+<script src="catalog/view/javascript/common.js"></script>
+<script src="catalog/view/theme/newstore/js/common.js"></script>
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
 <script>
 function init(elem, options){
 elem.addClass('countdownHolder');
@@ -171,7 +174,7 @@ function creatOverlayLoadPage(action) {
 {% if (hbannermob[lang_id]['image'] is defined and (hbannermob[lang_id]['image'] != '')) %}<style>.htop-b-mob img {margin:0 auto;}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}.htop-b-mob{padding-top:50px;}{% endif %}
 {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}header.pad-top{padding-top:5px;}{% endif %}</style>{% endif %}
-<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260709a" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/newstore/stylesheet/fortune-modern.css?v=20260715social6" rel="stylesheet" media="screen" />
 <script>
 document.addEventListener("click", function(e) {
   var btn = e.target.closest(".product-thumb .btn-wishlist");
@@ -181,7 +184,7 @@ document.addEventListener("click", function(e) {
     var thumb = btn.closest(".product-thumb");
     var titleEl = thumb.querySelector(".product-name a");
     var title = titleEl ? titleEl.textContent.trim() : "";
-    var url = "https://wa.me/77775887716?text=" + encodeURIComponent("Здравствуйте! Интересует цена на товар: " + title);
+    var url = "https://wa.me/77789707140?text=" + encodeURIComponent("Здравствуйте! Интересует цена товара: " + title);
     window.open(url, "_blank");
   }
 });
@@ -195,13 +198,35 @@ document.addEventListener("click", function(e) {
     var thumb = btn.closest(".product-thumb");
     var titleEl = thumb.querySelector(".product-name a");
     var title = titleEl ? titleEl.textContent.trim() : "";
-    var url = "https://wa.me/77775887716?text=" + encodeURIComponent("Здравствуйте! Интересует цена на товар: " + title);
+    var url = "https://wa.me/77789707140?text=" + encodeURIComponent("Здравствуйте! Интересует цена товара: " + title);
     window.open(url, "_blank");
   }
 });
 </script>
 </head>
 <body class="{{ class }}">
+<div class="fp-social-sidebar" aria-label="Социальные сети Fortune PROM">
+  <a class="fp-social-link fp-social-link--whatsapp" href="https://api.whatsapp.com/send/?phone=77789707140" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
+    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+    <span>WhatsApp</span>
+  </a>
+  <a class="fp-social-link fp-social-link--telegram" href="https://t.me/+77789707140" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram">
+    <i class="fa fa-telegram" aria-hidden="true"></i>
+    <span>Telegram</span>
+  </a>
+  <a class="fp-social-link fp-social-link--instagram" href="https://www.instagram.com/too_fortuneprom/" target="_blank" rel="noopener noreferrer" aria-label="Наш Instagram">
+    <i class="fa fa-instagram" aria-hidden="true"></i>
+    <span>Instagram</span>
+  </a>
+  <a class="fp-social-link fp-social-link--facebook" href="https://www.facebook.com/fortune.promtoo" target="_blank" rel="noopener noreferrer" aria-label="Наша страница в Facebook">
+    <i class="fa fa-facebook" aria-hidden="true"></i>
+    <span>Facebook</span>
+  </a>
+  <a class="fp-social-link fp-social-link--youtube" href="https://www.youtube.com/@fortuneprom5024" target="_blank" rel="noopener noreferrer" aria-label="Наш YouTube канал">
+    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+    <span>YouTube</span>
+  </a>
+</div>
 {% if (hbannerpc[lang_id]['image'] is defined and (hbannerpc[lang_id]['image'] != '')) %}
 <div class="htop-b-pc hidden-xs hidden-sm" {% if (nst_data['hbannerpc'][lang_id]['bg'] is defined and (nst_data['hbannerpc'][lang_id]['bg'] != '')) %}style="background:{{ nst_data['hbannerpc'][lang_id]['bg'] }}"{% endif %}>
 {% if nst_data['hbannerpc'][lang_id]['link'] is not empty %}
@@ -240,7 +265,16 @@ document.addEventListener("click", function(e) {
 </a>
 </div>
 {% endif %}
-<p id="back-top"><a rel="nofollow" class="btn btn-default" href="#top"><i class="fa fa-chevron-up" style="font-size:18px;"></i></a></p>
+<div class="fp-floating-actions" aria-label="Быстрые действия">
+  <a class="fp-floating-btn fp-floating-btn--whatsapp" href="https://wa.me/77789707140?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9D%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D1%81%20%D0%BF%D0%BE%D0%B4%D0%B1%D0%BE%D1%80%D0%BE%D0%BC%20%D0%BE%D0%B1%D0%BE%D1%80%D1%83%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F." target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
+    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+    <span>WhatsApp</span>
+  </a>
+  <button class="fp-floating-btn fp-floating-btn--top" type="button" aria-label="Вернуться наверх">
+    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    <span>Наверх</span>
+  </button>
+</div>
 <div id="login-form-popup" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-login">
 		<div class="modal-content">
@@ -256,13 +290,13 @@ document.addEventListener("click", function(e) {
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-							<input type="text" name="emailpopup" value="" placeholder="{{ entry_email|replace({ (':'): '' }) }}" id="input-email-popup" class="form-control" />
+							<input type="text" name="emailpopup" value="" placeholder="{{ entry_email|replace({ (':'): '' }) }}" id="input-email-popup" class="form-control" autocomplete="username" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-							<input type="password" name="passwordpopup" value="" placeholder="{{ entry_password|replace({ (':'): '' }) }}" id="input-password-popup" class="form-control" />
+							<input type="password" name="passwordpopup" value="" placeholder="{{ entry_password|replace({ (':'): '' }) }}" id="input-password-popup" class="form-control" autocomplete="current-password" />
 						</div>
 					</div>
 					<div class="form-group text-center">
@@ -280,10 +314,10 @@ document.addEventListener("click", function(e) {
   <div class="container">
     <div class="top-bar-flex">
       <div class="top-bar-left hidden-xs hidden-sm">
-        <span class="top-info-item"><i class="fa fa-truck"></i> Доставка по всему Казахстану</span>
-        <span class="top-info-item"><i class="fa fa-shield"></i> Официальная гарантия 12 месяцев</span>
+        <span class="top-info-item"><i class="fa fa-truck"></i> Доставка по Казахстану за 1-5 дней</span>
+        <span class="top-info-item"><i class="fa fa-shield"></i> Гарантия на оборудование 12 месяцев</span>
         <span class="top-info-item"><i class="fa fa-briefcase"></i> Работаем с ТОО и ИП</span>
-        <span class="top-info-item"><i class="fa fa-cogs"></i> Подбор оборудования под задачу</span>
+        <span class="top-info-item"><i class="fa fa-cogs"></i> Подбор оборудования под вашу задачу</span>
       </div>
       <div class="top-bar-right">
         <a href="index.php?route=information/information&information_id=4" class="top-link">О компании</a>
@@ -305,8 +339,8 @@ document.addEventListener("click", function(e) {
 </nav>
 <header {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}class="pad-top"{% endif %}>
 <div class="container">
-<div class="row vertical-align">
-      <div class="col-xs-6 col-sm-12 col-md-3 text-center text-left-md logo-top">
+<div class="fp-header-row">
+      <div class="fp-logo">
         <div id="logo">
         {% if (logo) %}
             {% if (home == home_page) %}
@@ -319,24 +353,126 @@ document.addEventListener("click", function(e) {
           {% endif %}
         </div>
       </div>
-		<div class="phone-box col-xs-6 col-sm-12 col-md-3 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %}{% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-md-push-5{% else %}col-md-push-4{% endif %}{% endif %} text-xs-center text-sm-center text-md-center">
-			<div id="phone">
-				<div class="contact-header">
-					<div class="dropdown-toggle">
-						<div class="additional-tel dth">
-							<a href="tel:+77775887716"><div class="icon-image"><i class="fa fa-phone"></i></div> +7 777 588 77 16</a>
-						</div>
-						<div class="additional-tel dth">
-							<a href="https://wa.me/77787887716" target="_blank"><div class="icon-image"><i class="fa fa-whatsapp"></i></div> +7 778 788 77 16</a>
-						</div>
-					</div>
-					<div class="text_after_phone">Отдел снабжения</div>
-				</div>
-			</div>
-	  </div>
-	  <div class="box-cart {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}hidden-xs{% endif %} col-xs-12 {% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-sm-4 col-sm-push-8 col-md-1 col-md-push-5 {% else %}col-xs-12 col-sm-4 col-md-2 col-md-push-4 col-sm-push-8{% endif %}">{{ cart }}</div>
-      <div class="box-search {% if (main_menu_fix_mobile is defined and (main_menu_fix_mobile == 1)) %}hidden-xs{% endif %} col-xs-12 {% if (type_shop_cart is defined and (type_shop_cart == '1')) %}col-sm-8 col-sm-pull-4 col-md-5 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %} col-md-pull-4{% else %}col-md-pull-1{% endif %}{% else %} col-sm-8 col-md-4 {% if (swap_header_blocks is defined and (swap_header_blocks == '1')) %} col-md-pull-5 col-sm-pull-4{% else %}col-sm-pull-4 col-md-pull-2{% endif %}{% endif %} search-top">{{ search }}</div>
-	</div>
+
+      <div class="fp-catalog-btn dropdown">
+        <button class="fp-btn-catalog dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-bars"></i> Каталог
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="reduktory"><i class="fa fa-cogs"></i> Редукторы</a></li>
+          <li><a href="elektrodvigateli"><i class="fa fa-bolt"></i> Электродвигатели</a></li>
+          <li><a href="nasosy"><i class="fa fa-tint"></i> Насосы</a></li>
+          <li><a href="konveyernoe-oborudovanie"><i class="fa fa-exchange"></i> Конвейерное оборудование</a></li>
+          <li><a href="gruzopodemnoe-oborudovanie"><i class="fa fa-arrow-up"></i> Грузоподъемное оборудование</a></li>
+          <li><a href="generatory"><i class="fa fa-tachometer"></i> Генераторы</a></li>
+          <li><a href="kompressory"><i class="fa fa-compress"></i> Компрессоры</a></li>
+          <li><a href="stanki"><i class="fa fa-wrench"></i> Станки</a></li>
+        </ul>
+      </div>
+
+      <div class="fp-search">{{ search }}</div>
+
+      <div class="fp-phones">
+        <div id="phone">
+          <div class="contact-header">
+            <div class="additional-tel">
+              <a href="tel:+77789707140"><i class="fa fa-phone"></i> +7 778 970 71 40</a>
+            </div>
+            <div class="additional-tel">
+              <a href="https://wa.me/77789707140" target="_blank"><i class="fa fa-whatsapp"></i> +7 778 970 71 40</a>
+            </div>
+            <div class="text_after_phone">Отдел снабжения</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fp-actions">
+        <a href="index.php?route=account/wishlist" class="fp-action-btn" title="Избранное">
+          <i class="fa fa-heart"></i>
+          <span>Избранное</span>
+        </a>
+        <a href="index.php?route=product/compare" class="fp-action-btn" title="Сравнение">
+          <i class="fa fa-bar-chart-o"></i>
+          <span>Сравнение</span>
+        </a>
+        <a href="{{ account }}" class="fp-action-btn" title="Войти">
+          <i class="fa fa-user"></i>
+          <span>Войти</span>
+        </a>
+        <div class="fp-cart-btn">{{ cart }}</div>
+      </div>
+</div>
 </div>
 {{ menuns }}
 </header>
+
+<script>
+function formatHeaderCart() {
+  var cartBtn = $('#cart > button');
+  if (cartBtn.length && !cartBtn.hasClass('formatted')) {
+    var totalText = cartBtn.find('.cart-total').text();
+    var count = 0;
+    var matches = totalText.match(/(\d+)/);
+    if (matches && matches[1]) {
+      count = parseInt(matches[1]);
+    }
+
+    cartBtn.html(
+      '<div class="cart-icon-wrapper">' +
+        '<i class="fa fa-shopping-bag"></i>' +
+        '<span class="cart-count-badge">' + count + '</span>' +
+      '</div>' +
+      '<span class="cart-btn-label">Корзина</span>'
+    );
+    cartBtn.addClass('formatted');
+  }
+}
+
+$(document).ready(function() {
+  formatHeaderCart();
+
+  var observer = new MutationObserver(function() {
+    var cartBtn = $('#cart > button');
+    if (cartBtn.length && !cartBtn.hasClass('formatted')) {
+      formatHeaderCart();
+    }
+  });
+  var target = document.getElementById('cart');
+  if (target) {
+    observer.observe(target, { childList: true, subtree: true });
+  }
+});
+</script>
+<script>
+(function() {
+  function onReady(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
+  }
+
+  onReady(function() {
+    var topBtn = document.querySelector(".fp-floating-btn--top");
+    if (!topBtn) {
+      return;
+    }
+
+    function toggleTopButton() {
+      topBtn.classList.toggle("is-visible", window.pageYOffset > 420);
+    }
+
+    topBtn.addEventListener("click", function() {
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({
+        top: 0,
+        behavior: reduceMotion ? "auto" : "smooth"
+      });
+    });
+
+    window.addEventListener("scroll", toggleTopButton, { passive: true });
+    toggleTopButton();
+  });
+})();
+</script>

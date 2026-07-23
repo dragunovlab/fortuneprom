@@ -1,4 +1,4 @@
-<div id="slideshow{{ module }}" class="owl-carousel carousel-container" style="opacity: 1;">
+<div id="slideshow{{ module }}" class="owl-carousel main-slideshow-carousel">
   {% for banner in banners %} 
   <div class="item">
     {% if (banner.link) %} 
@@ -10,14 +10,20 @@
   {% endfor %} 
 </div>
 <script>
-$('#slideshow{{ module }}').owlCarousel({
-	items: 6,
-	autoPlay: 7000,
-	lazyLoad: false,
-	singleItem: true,
-	navigation: true,
-	navigationText: ['<span class="slideshow-btn-prev"></span>', '<span class="slideshow-btn-next"></span>'],
-	pagination: true,
-	transitionStyle: 'fade'
-});
+(function initMainSlider() {
+  if (typeof jQuery !== 'undefined' && typeof jQuery.fn.owlCarousel !== 'undefined') {
+    $('#slideshow{{ module }}').owlCarousel({
+      singleItem: true,
+      autoPlay: 6000,
+      stopOnHover: true,
+      navigation: true,
+      navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+      pagination: true,
+      slideSpeed: 400,
+      paginationSpeed: 500
+    });
+  } else {
+    setTimeout(initMainSlider, 50);
+  }
+})();
 </script>

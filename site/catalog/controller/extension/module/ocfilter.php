@@ -10,11 +10,7 @@ class ControllerExtensionModuleOCFilter extends Controller {
     	return;
     }
 
-    if ($this->config->get('module_ocfilter_show_price') && $this->ocfilter->getMinPrice() < $this->ocfilter->getMaxPrice() - 1) {
-      $data['show_price'] = 1;
-    } else {
-      $data['show_price'] = 0;
-    }
+    $data['show_price'] = 0;
 
     $data['heading_title'] = $this->language->get('heading_title');
 
@@ -106,7 +102,7 @@ class ControllerExtensionModuleOCFilter extends Controller {
     $json['values'] = array();
     $json['sliders'] = array();
 
-    if ($this->config->get('module_ocfilter_show_price') && $option_id != 'p') {
+    if (false && $this->config->get('module_ocfilter_show_price') && $option_id != 'p') {
       $_filter_data = $filter_data;
 
       $_filter_data['filter_ocfilter'] = $this->ocfilter->cancelOptionParams('p');

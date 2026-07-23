@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class ControllerExtensionModuleSlidedeals extends Controller {
 	public function index($setting) {
 		$this->document->addScript('catalog/view/theme/newstore/js/slick/slick.min.js');
@@ -136,19 +136,19 @@ class ControllerExtensionModuleSlidedeals extends Controller {
 						$image_thumb = $this->model_tool_image->resize('placeholder.png', 90, 90);
 					}
 					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$price = 'Цена по запросу';
 					} else {
 						$price = false;
 					}
 
 					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+						$special = false;
 					} else {
 						$special = false;
 					}
 
 					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+						$tax = false;
 					} else {
 						$tax = false;
 					}
@@ -206,7 +206,7 @@ class ControllerExtensionModuleSlidedeals extends Controller {
 						foreach ($option['product_option_value'] as $option_value) {
 							if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 								if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-									$option_price = $this->currency->format($this->tax->calculate($option_value['price'], $result['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $currency);
+									$option_price = false;
 								} else {
 									$option_price = false;
 								}
@@ -256,13 +256,13 @@ class ControllerExtensionModuleSlidedeals extends Controller {
 						$special_date_end = false;
 					}
 					if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-						$price_no_format = $this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$price_no_format = 0;
 					} else {
 						$price_no_format = false;
 					}
 
 					if ((float)$result['special']) {
-						$special_no_format = $this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax'));
+						$special_no_format = false;
 					} else {
 						$special_no_format = false;
 					}

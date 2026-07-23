@@ -58,17 +58,63 @@ class ControllerCommonFooter extends Controller {
 
 		$data['scripts'] = $this->document->getScripts('footer');
 
-		// JSON-LD Organization Schema
+		// JSON-LD Organization (обогащённый: LocalBusiness + sameAs + полный адрес)
 		$schema_org = array(
 			'@context' => 'https://schema.org',
 			'@type' => 'Organization',
 			'name' => $this->config->get('config_name'),
+			'alternateName' => 'Fortune PROM',
 			'url' => HTTPS_SERVER,
 			'logo' => HTTPS_SERVER . 'image/' . $this->config->get('config_logo'),
-			'telephone' => $this->config->get('config_telephone'),
+			'telephone' => '+7 778 970 71 40',
 			'email' => $this->config->get('config_email'),
-			'address' => array('@type' => 'PostalAddress', 'addressCountry' => 'KZ'),
-			'contactPoint' => array('@type' => 'ContactPoint', 'telephone' => $this->config->get('config_telephone'), 'contactType' => 'sales')
+			'description' => 'Комплексные поставки промышленного оборудования в Казахстане с 2015 года',
+			'foundingDate' => '2015',
+			'address' => array(
+				'@type' => 'PostalAddress',
+				'addressLocality' => 'Алматы',
+				'streetAddress' => 'улица Фаворского, 21',
+				'addressRegion' => 'Алматы',
+				'addressCountry' => 'KZ'
+			),
+			'contactPoint' => array(
+				'@type' => 'ContactPoint',
+				'telephone' => '+7 778 970 71 40',
+				'contactType' => 'sales',
+				'availableLanguage' => array('Russian', 'Kazakh')
+			),
+			'sameAs' => array(
+				'https://wa.me/77789707140',
+				'https://t.me/fortuneprom',
+				'https://www.instagram.com/fortuneprom.kz/'
+			)
+		);
+
+		// JSON-LD LocalBusiness (для карты и локального SEO)
+		$schema_lb = array(
+			'@context' => 'https://schema.org',
+			'@type' => 'LocalBusiness',
+			'name' => $this->config->get('config_name'),
+			'url' => HTTPS_SERVER,
+			'telephone' => '+7 778 970 71 40',
+			'email' => $this->config->get('config_email'),
+			'address' => array(
+				'@type' => 'PostalAddress',
+				'addressLocality' => 'Алматы',
+				'streetAddress' => 'улица Фаворского, 21',
+				'addressRegion' => 'Алматы',
+				'addressCountry' => 'KZ'
+			),
+			'openingHoursSpecification' => array(
+				array(
+					'@type' => 'OpeningHoursSpecification',
+					'dayOfWeek' => array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'),
+					'opens' => '09:00',
+					'closes' => '18:00'
+				)
+			),
+			'image' => HTTPS_SERVER . 'image/' . $this->config->get('config_logo'),
+			'priceRange' => '₸₸₸'
 		);
 
 		// JSON-LD WebSite Schema with SearchAction
@@ -85,6 +131,7 @@ class ControllerCommonFooter extends Controller {
 		);
 
 		$schema_html = '<script type="application/ld+json">' . json_encode($schema_org, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>';
+		$schema_html .= '<script type="application/ld+json">' . json_encode($schema_lb, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>';
 		$schema_html .= '<script type="application/ld+json">' . json_encode($schema_ws, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>';
 		
 		return $schema_html . $this->load->view('common/footer', $data);

@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 class ControllerExtensionModuleWhatsAppShare extends Controller  {
 	private $moduleName;
 	private $modulePath;
@@ -83,19 +83,19 @@ class ControllerExtensionModuleWhatsAppShare extends Controller  {
 				}
 
 				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-					$price = $this->currency->format($this->tax->calculate($product_data['price'], $product_data['tax_class_id'], $this->config->get('config_tax')));
+					$price = 'Цена по запросу';
 				} else {
 					$price = false;
 				}
 
 				if ((float)$product_data['special']) {
-					$special = $this->currency->format($this->tax->calculate($product_data['special'], $product_data['tax_class_id'], $this->config->get('config_tax')));
+					$special = false;
 				} else {
 					$special = false;
 				}
 
 				if ($this->config->get('config_tax')) {
-					$tax = $this->currency->format((float)$product_data['special'] ? $product_data['special'] : $product_data['price']);
+					$tax = false;
 				} else {
 					$tax = false;
 				}

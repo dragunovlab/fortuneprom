@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class ControllerExtensionModuleProductcategory extends Controller {
 	public function index($setting) {
 		$this->load->language('extension/module/productcategory');
@@ -54,19 +54,19 @@ class ControllerExtensionModuleProductcategory extends Controller {
 						}
 
 						if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-							$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+							$price = 'Цена по запросу';
 						} else {
 							$price = false;
 						}
 
 						if ((float)$result['special']) {
-							$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+							$special = false;
 						} else {
 							$special = false;
 						}
 
 						if ($this->config->get('config_tax')) {
-							$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+							$tax = false;
 						} else {
 							$tax = false;
 						}

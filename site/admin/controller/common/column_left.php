@@ -379,6 +379,15 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => $marketing
 				);	
 			}
+
+			// Fortune SEO Panel
+			$data['menus'][] = array(
+				'id'       => 'menu-fortune-seo',
+				'icon'	   => 'fa-line-chart', 
+				'name'	   => 'Fortune SEO Панель',
+				'href'     => $this->url->link('extension/module/fortune_seo', 'user_token=' . $this->session->data['user_token'], true),
+				'children' => array()
+			);
 			
 			// System
 			$system = array();
